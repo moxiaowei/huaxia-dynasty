@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>华夏朝代脉络 · 秦 → 今</title>
+<style>
+:root{
+  --zhu:#a8322a; --zhu-deep:#7d1f1a; --zhu-l:#c0504a;
+  --gold:#c9a227; --gold-l:#e6c665; --gold-pale:#f0dfa8;
+  --paper:#f7f1e2; --paper-2:#efe5cf; --card:#fffdf6;
+  --ink:#2b2320; --ink-l:#6b5d50; --ink-xl:#9a8d7d;
+  --qing:#3a6b6b; --line:#e2d6bd;
+  --shadow:0 6px 22px rgba(90,50,20,.10);
+  --topbar: 90px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:radial-gradient(circle at 12% 6%, rgba(201,162,39,.07), transparent 42%),
+    radial-gradient(circle at 88% 3%, rgba(168,50,42,.06), transparent 40%),
+    repeating-linear-gradient(0deg, rgba(120,80,40,.018) 0 2px, transparent 2px 4px),var(--paper);
+  color:var(--ink);line-height:1.6;min-height:100vh;padding-bottom:40px}
+.wrap{max-width:820px;margin:0 auto}
+
+.header{position:relative;overflow:hidden;text-align:center;padding:32px 20px 24px;
+  background:linear-gradient(150deg,#6e1a16 0%, #9c2d26 46%, #b8443a 100%);color:var(--gold-pale);border-bottom:3px solid var(--gold)}
+.header .clouds{position:absolute;inset:0;opacity:.16;pointer-events:none}
+.header .seal{width:54px;height:54px;margin:0 auto 8px;border-radius:11px;
+  background:linear-gradient(150deg,#d8453b,#a8322a);border:2px solid var(--gold-l);
+  display:flex;align-items:center;justify-content:center;font-family:"Songti SC","SimSun",serif;font-weight:700;font-size:27px;color:#ffe9c2;
+  box-shadow:0 4px 14px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,225,160,.25)}
+.header h1{font-family:"Songti SC","SimSun",serif;font-weight:700;font-size:clamp(23px,6.2vw,38px);letter-spacing:2px;color:#f6e3ad;text-shadow:0 2px 10px rgba(0,0,0,.4)}
+.header .sub{margin-top:5px;font-size:clamp(11.5px,3.2vw,14px);color:#e9cf9a;letter-spacing:1px}
+
+/* sticky topbar: 2 rows */
+.topbar{position:sticky;top:0;z-index:60;background:rgba(247,241,226,.97);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(120,80,40,.06)}
+.tabs{display:flex;gap:7px;overflow-x:auto;padding:8px 12px 6px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:0 0 auto;font-family:inherit;font-size:13px;font-weight:600;color:var(--zhu-deep);
+  background:#fff;border:1px solid var(--line);border-radius:18px;padding:5px 13px;white-space:nowrap;cursor:pointer;transition:.18s}
+.tabs button.active{background:linear-gradient(145deg,var(--zhu),var(--zhu-deep));color:var(--gold-l);border-color:var(--zhu-deep);box-shadow:0 3px 10px rgba(125,31,26,.35)}
+.tabs button.ov{color:var(--qing);border-color:#bcd4d2}
+.tabs button.ov.active{background:linear-gradient(145deg,#3a6b6b,#28504f);color:#dfeeed}
+
+/* subnav: period jump chips */
+.subnav{display:flex;gap:6px;overflow-x:auto;padding:0 12px 8px;scrollbar-width:none;border-top:1px solid rgba(226,214,189,.7);padding-top:7px}
+.subnav::-webkit-scrollbar{display:none}
+.subnav.hide{display:none}
+.subnav button{flex:0 0 auto;font-family:inherit;font-size:11.5px;font-weight:600;color:var(--ink-l);
+  background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:4px 11px;white-space:nowrap;cursor:pointer;transition:.18s}
+.subnav button .sn{color:var(--zhu);font-weight:700;margin-right:3px}
+.subnav button.active{background:linear-gradient(145deg,var(--gold),#b8912a);color:#3a2600;border-color:#b8912a;box-shadow:0 2px 8px rgba(201,162,39,.4)}
+.subnav button.active .sn{color:#5a3a00}
+
+.panel{padding:6px 16px 20px;display:none}
+.panel.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.dynhead{margin:14px 0 6px;padding:15px 18px;border-radius:14px;color:#fff;
+  background:linear-gradient(135deg,#7d1f1a,#a8322a 60%,#b8443a);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.dynhead .dname{font-family:"Songti SC",serif;font-size:25px;font-weight:700;color:var(--gold-l);letter-spacing:2px}
+.dynhead .dmeta{margin-top:6px;display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#f0dcb0}
+.dynhead .dmeta b{color:#fff;font-weight:600}
+.dynhead .dov{margin-top:8px;font-size:12.8px;color:#f3e2bd;line-height:1.55;border-top:1px solid rgba(240,220,160,.22);padding-top:7px}
+
+.era{position:relative;z-index:2;margin:22px 0 12px -16px;padding:11px 18px 11px 22px;border-radius:0 40px 40px 0;
+  background:linear-gradient(100deg,#7d1f1a,#a8322a);color:#ffe9c2;box-shadow:var(--shadow);border-left:6px solid var(--gold);
+  scroll-margin-top:var(--topbar)}
+.era .eno{font-family:"Songti SC",serif;font-size:20px;font-weight:700;color:var(--gold-l);margin-right:9px}
+.era .ename{font-family:"Songti SC",serif;font-size:16px;font-weight:700;letter-spacing:1px}
+.era .esub{display:block;font-size:11px;color:#dfc08f;margin-top:2px}
+
+.tl{position:relative;padding:2px 0 4px}
+.tl::before{content:"";position:absolute;left:18px;top:8px;bottom:10px;width:3px;
+  background:linear-gradient(var(--gold-l),var(--zhu) 70%,var(--zhu-deep));border-radius:3px;opacity:.5}
+.card{position:relative;z-index:1;margin:0 0 8px 44px;background:var(--card);border:1px solid var(--line);border-radius:13px;
+  padding:13px 15px;box-shadow:var(--shadow)}
+.card::before{content:attr(data-n);position:absolute;left:-38px;top:14px;width:30px;height:30px;border-radius:50%;
+  background:linear-gradient(145deg,var(--zhu),var(--zhu-deep));color:var(--gold-l);font-family:"Songti SC",serif;font-weight:700;font-size:13px;
+  display:flex;align-items:center;justify-content:center;border:2px solid var(--gold-l);box-shadow:0 2px 8px rgba(125,31,26,.4)}
+.card .top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.card .name{font-family:"Songti SC","SimSun",serif;font-size:17.5px;font-weight:700;color:var(--zhu-deep);letter-spacing:.5px}
+.card .temple{font-size:11px;color:#fff;background:var(--zhu);border-radius:5px;padding:1px 6px;font-weight:600}
+.card .years{font-size:12px;color:var(--gold);font-weight:700;margin-left:auto;white-space:nowrap}
+.card .tags{display:flex;gap:6px;flex-wrap:wrap;margin:7px 0 6px}
+.card .tag{font-size:10.5px;color:var(--ink-l);background:var(--paper-2);border-radius:20px;padding:1px 8px}
+.card ul{list-style:none;margin-top:2px}
+.card li{position:relative;font-size:13px;color:var(--ink);padding-left:14px;margin:3px 0;line-height:1.55}
+.card li::before{content:"";position:absolute;left:2px;top:8px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.card li b{color:var(--zhu-deep);font-weight:600}
+.card.tp{border-color:#e7b98f;box-shadow:0 6px 22px rgba(200,90,30,.16),0 0 0 2px rgba(201,162,39,.18)}
+.card.tp::before{background:linear-gradient(145deg,#d98b2b,#b8641a)}
+.card .tpflag{display:inline-block;font-size:10.5px;font-weight:700;color:#7d3a00;background:linear-gradient(90deg,#f4d27a,#e9b949);border-radius:5px;padding:1px 8px;margin-bottom:6px}
+
+.conn{margin:0 0 8px 44px;position:relative;height:30px;display:flex;align-items:center}
+.conn::before{content:"";position:absolute;left:-20px;top:50%;width:14px;height:2px;background:var(--gold);opacity:.6}
+.conn span{font-size:11px;border-radius:20px;padding:2px 11px;font-weight:600;background:#fff;border:1px solid var(--line);color:var(--ink-l)}
+.conn.usurp span,.conn.war span{color:var(--zhu);border-color:#e4b7b3;background:#fdf3f2}
+.conn.branch span,.conn.sib span{color:var(--qing);border-color:#b6d0cf;background:#f0f7f6}
+.conn span::before{content:"↓ "}
+.conn.usurp span::before,.conn.war span::before{content:"⚔ "}
+.conn.branch span::before{content:"↳ "}
+.conn.sib span::before{content:"⇄ "}
+
+.ovlist{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.ovrow{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:11px 14px;box-shadow:var(--shadow);cursor:pointer;transition:.18s}
+.ovrow:hover{transform:translateX(3px);border-color:var(--gold)}
+.ovrow .dot{flex:0 0 12px;height:12px;border-radius:50%}
+.ovrow .ovname{font-family:"Songti SC",serif;font-size:16px;font-weight:700;color:var(--zhu-deep);flex:0 0 auto;min-width:56px}
+.ovrow .ovmeta{flex:1;min-width:0}
+.ovrow .ovy{font-size:12px;color:var(--gold);font-weight:700}
+.ovrow .ovf{font-size:12px;color:var(--ink-l);margin-top:1px}
+.ovrow .arrow{color:var(--ink-xl);font-size:14px}
+
+.copyright{text-align:center;font-size:11px;color:var(--ink-xl);margin-top:24px;letter-spacing:.5px}
+.hint{text-align:center;font-size:12px;color:var(--ink-xl);margin:12px 0 2px}
+
+@media (max-width:520px){
+  .card{margin-left:38px;padding:12px 12px}
+  .card::before{left:-33px;width:27px;height:27px;font-size:12px}
+  .tl::before{left:14px}
+  .card .name{font-size:16px}
+  .conn{margin-left:38px}
+  .dynhead .dname{font-size:21px}
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <svg class="clouds" viewBox="0 0 1200 300" preserveAspectRatio="none"><g fill="#ffe6b0">
+    <path d="M0,120 q40,-40 90,-18 q30,-40 90,-20 q40,-34 100,-10 q50,-30 110,4 q60,-30 120,-6 q50,-30 110,2 q50,-26 110,6 q60,-30 120,-4 q50,-26 110,8 L1200,0 L0,0 Z"/>
+  </g></svg>
+  <div class="seal">史</div>
+  <h1>华夏朝代脉络</h1>
+  <div class="sub">秦 · 前 221 ——— 今 · 两千两百余年</div>
+</header>
+
+<div class="topbar" id="topbar">
+  <nav class="tabs" id="tabs"></nav>
+  <nav class="subnav hide" id="subnav"></nav>
+</div>
+
+<main class="wrap" id="panels"></main>
+
+<footer class="wrap">
+  <div class="hint">顶部标签切朝代 · 第二行是分期导航（点击跳转、自动高亮）·「明」为完整十六帝详版</div>
+  <div class="copyright">华夏朝代脉络 · 秦→今　|　后续将逐朝细化代表人物与大事</div>
+</footer>
+
+<script>
+/* ================= 数据：每个朝代为「多个分期板块」 ================= */
+/* node: {name,b,temple,years,tags,pts,tp,tpLabel,link}  (b=徽章/身份) */
+const CN=["①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩","⑪","⑫","⑬","⑭","⑮","⑯"];
+
+const DYN=[
+ {id:"qin", name:"秦", years:"前221–前207", cap:"咸阳", span:"15年",
+  ov:"中国第一个大一统王朝，确立中央集权，二世而亡。",
+  periods:[
+   {name:"横扫六合", sub:"统一与建制", nodes:[
+     {name:"秦始皇·嬴政", b:"始皇帝", years:"前221–前210", tags:["大一统","始皇帝"],
+      pts:["灭六国、一统天下","<b>皇帝制 / 三公九卿 / 郡县制</b>","书同文、车同轨、统一度量衡与货币","修长城、驰道，焚书坑儒"]},
+   ]},
+   {name:"盛极而亡", sub:"二世而亡", nodes:[
+     {name:"秦二世·胡亥", b:"二世", years:"前210–前207", tags:["二世而亡"],
+      pts:["赵高专权、指鹿为马","<b>陈胜吴广起义</b>（前209）","项羽、刘邦起兵，秦亡"]},
+   ]},
+  ], to:{t:"war", l:"楚汉相争 → 汉"}},
+
+ {id:"han", name:"汉", years:"前202–220", cap:"长安 / 洛阳", span:"约400年",
+  ov:"「汉承秦制」，奠定汉族与中华文化基本盘；分西汉、东汉，中间夹王莽新朝。",
+  periods:[
+   {name:"西汉·奠基与鼎盛", sub:"高祖 → 文景 → 武帝", nodes:[
+     {name:"汉高祖·刘邦", b:"西汉", years:"前202–前195", tags:["开国"], pts:["楚汉相争胜、建汉","郡国并行、休养生息","白登之围"]},
+     {name:"文景之治", b:"西汉", years:"前180–前141", tags:["治世"], pts:["与民休息、轻徭薄赋","平定七国之乱"]},
+     {name:"汉武帝·刘彻", b:"西汉", years:"前141–前87", tags:["雄才大略"], pts:["<b>独尊儒术</b>","北击匈奴（卫青·霍去病）","张骞通西域、开丝绸之路","盐铁官营、推恩令"]},
+   ]},
+   {name:"新莽与东汉", sub:"篡汉 → 光武中兴 → 衰亡", nodes:[
+     {name:"王莽篡汉·新朝", b:"新", years:"8–23", tags:["篡位"], pts:["代汉建「新」","托古改制失败、天下大乱"]},
+     {name:"光武帝·刘秀", b:"东汉", years:"25–57", tags:["光武中兴"], pts:["重建汉朝、定都洛阳","光武中兴"]},
+     {name:"东汉中后期", b:"东汉", years:"57–189", tags:["外戚宦官"], pts:["明章之治后转衰","外戚宦官交替、党锢之祸","<b>黄巾起义</b>（184）"]},
+     {name:"群雄割据", b:"东汉末", years:"189–220", tags:["乱世"], pts:["董卓之乱","曹操挟天子以令诸侯","曹丕篡汉"]},
+   ]},
+  ], to:{t:"normal", l:"汉末三分 → 三国"}},
+
+ {id:"sanguo", name:"三国", years:"220–280", cap:"洛阳/成都/建业", span:"60年",
+  ov:"魏、蜀、吴三分天下，英雄辈出的时代。",
+  periods:[
+   {name:"汉末乱世·三分天下", sub:"官渡 → 赤壁 → 鼎立", nodes:[
+     {name:"官渡之战", b:"战役", years:"200", tags:["以少胜多"], pts:["曹操大破袁绍，统一北方"]},
+     {name:"赤壁之战", b:"战役", years:"208", tags:["三分关键"], pts:["孙刘联军火攻破曹","奠定三足鼎立格局"]},
+   ]},
+   {name:"三国鼎立与归晋", sub:"魏蜀吴 → 司马归晋", nodes:[
+     {name:"曹魏·曹丕", b:"魏", years:"220–266", tags:["篡汉"], pts:["代汉建魏","九品中正制、屯田制"]},
+     {name:"蜀汉·刘备", b:"蜀", years:"221–263", tags:["正统"], pts:["三顾茅庐、<b>隆中对</b>","诸葛亮六出祁山","263 被魏所灭"]},
+     {name:"东吴·孙权", b:"吴", years:"222–280", tags:["江东"], pts:["据江东、赤壁抗曹","280 被晋所灭"]},
+   ]},
+  ], to:{t:"normal", l:"司马篡魏 → 晋"}},
+
+ {id:"jin", name:"晋", years:"265–420", cap:"洛阳 / 建康", span:"155年",
+  ov:"短暂统一后陷入内乱，衣冠南渡，北方进入五胡十六国。",
+  periods:[
+   {name:"西晋·短暂统一", sub:"三家归晋 → 内乱", nodes:[
+     {name:"晋武帝·司马炎", b:"西晋", years:"265–316", tags:["短暂一统"], pts:["三家归晋（280灭吴）","<b>八王之乱</b>","<b>永嘉之乱</b>·五胡乱华，316亡"]},
+   ]},
+   {name:"东晋·衣冠南渡", sub:"偏安江南 → 淝水", nodes:[
+     {name:"晋元帝·司马睿", b:"东晋", years:"317–420", tags:["衣冠南渡"], pts:["南渡建康、偏安江南","王与马共天下","<b>淝水之战</b>（383 谢安）","祖逖、桓温北伐未果"]},
+   ]},
+  ], to:{t:"normal", l:"南北对峙 → 南北朝"}},
+
+ {id:"nanbei", name:"南北朝", years:"420–589", cap:"建康 / 平城·洛阳", span:"169年",
+  ov:"南北对峙、民族大融合，佛教大兴，为隋唐大一统蓄势。",
+  periods:[
+   {name:"南朝·宋齐梁陈", sub:"建康更替", nodes:[
+     {name:"南朝更替", b:"南朝", years:"420–589", tags:["更替"], pts:["刘裕建宋，后经齐、梁、陈","皆都建康，门阀士族延续"]},
+   ]},
+   {name:"北朝·民族融合", sub:"北魏 → 孝文改革 → 分裂", nodes:[
+     {name:"北魏", b:"北朝", years:"386–534", tags:["统一北方"], pts:["鲜卑拓跋氏统一北方","<b>孝文帝改革</b>：汉化、迁都洛阳","加速民族融合"]},
+     {name:"北齐·北周", b:"北朝", years:"534–581", tags:["分裂"], pts:["东魏西魏→北齐北周","北周渐强，为隋奠基"]},
+   ]},
+  ], to:{t:"normal", l:"杨坚代周 → 隋"}},
+
+ {id:"sui", name:"隋", years:"581–618", cap:"大兴（长安）", span:"37年",
+  ov:"结束数百年分裂、再度大一统，创三省六部与科举，却二世而亡。",
+  periods:[
+   {name:"开皇之治", sub:"再造统一与建制", nodes:[
+     {name:"隋文帝·杨坚", b:"开皇之治", years:"581–604", tags:["再造统一"], pts:["589 灭陈统一南北","<b>三省六部制</b>、<b>科举制</b>、均田制","开皇之治、府库充盈"]},
+   ]},
+   {name:"大业与崩亡", sub:"炀帝功过", nodes:[
+     {name:"隋炀帝·杨广", b:"炀帝", years:"604–618", tags:["功过"], pts:["开凿<b>大运河</b>","三征高句丽","滥用民力、天下大乱，618亡"]},
+   ]},
+  ], to:{t:"normal", l:"李渊起兵 → 唐"}},
+
+ {id:"tang", name:"唐", years:"618–907", cap:"长安", span:"289年",
+  ov:"中国封建社会的鼎盛时代，开放包容、万国来朝，由盛转衰于安史之乱。",
+  periods:[
+   {name:"初唐·贞观之治", sub:"太宗与盛世奠基", nodes:[
+     {name:"唐太宗·李世民", b:"贞观之治", years:"626–649", tags:["千古一帝"], pts:["玄武门之变","<b>贞观之治</b>、虚心纳谏","被尊「天可汗」、拓土开边"]},
+   ]},
+   {name:"盛唐·女皇与开元", sub:"武周 → 开元盛世", nodes:[
+     {name:"武则天", b:"武周", years:"690–705", tags:["唯一女皇"], pts:["中国唯一正统女皇帝","承贞观、启开元"]},
+     {name:"唐玄宗·李隆基", b:"开元盛世", years:"712–756", tags:["极盛转衰"], pts:["<b>开元盛世</b>","<b>安史之乱</b>（755–763），由盛转衰"]},
+   ]},
+   {name:"中晚唐·由盛转衰", sub:"藩镇·宦官·党争", nodes:[
+     {name:"中晚唐", b:"衰世", years:"763–907", tags:["藩镇宦官"], pts:["藩镇割据、宦官专权、牛李党争","<b>黄巢起义</b>（875）","907 朱温篡唐"]},
+   ]},
+  ], to:{t:"normal", l:"唐亡 → 五代十国"}},
+
+ {id:"wudai", name:"五代十国", years:"907–979", cap:"开封等", span:"72年",
+  ov:"唐亡后北方五代更迭、南方十国割据的大分裂时期。",
+  periods:[
+   {name:"五代更迭", sub:"梁唐晋汉周", nodes:[
+     {name:"五代更迭", b:"五代", years:"907–960", tags:["更迭频仍"], pts:["后梁·后唐·后晋·后汉·后周","<b>石敬瑭割让燕云十六州</b>（936）","后周世宗柴荣改革图强"]},
+   ]},
+   {name:"十国与归宋", sub:"南方割据 → 陈桥", nodes:[
+     {name:"南方十国", b:"十国", years:"907–979", tags:["割据"], pts:["吴、南唐、吴越、前后蜀等","南方相对安定，经济文化发展"]},
+   ]},
+  ], to:{t:"normal", l:"陈桥兵变 → 宋"}},
+
+ {id:"song", name:"宋", years:"960–1279", cap:"开封 / 临安", span:"319年",
+  ov:"经济文化极盛、重文轻武，与辽、西夏、金并立，最终亡于蒙古。",
+  periods:[
+   {name:"北宋·重文轻武", sub:"立国 → 变法 → 靖康", nodes:[
+     {name:"宋太祖·赵匡胤", b:"北宋", years:"960–1127", tags:["重文轻武"], pts:["陈桥兵变、<b>杯酒释兵权</b>","加强中央集权、重文轻武","<b>澶渊之盟</b>（1004）"]},
+     {name:"王安石变法", b:"北宋", years:"1069–1085", tags:["改革"], pts:["青苗法、募役法等新政","新旧党争激烈"]},
+     {name:"靖康之变", b:"北宋末", years:"1127", tags:["亡国"], pts:["金灭北宋、掳徽钦二帝","宋室南渡"]},
+   ]},
+   {name:"南宋·偏安江南", sub:"抗金 → 崖山", nodes:[
+     {name:"宋高宗·赵构", b:"南宋", years:"1127–1279", tags:["偏安"], pts:["岳飞抗金、绍兴和议","偏安江南、经济繁荣","<b>1279 崖山海战</b>，亡于元"]},
+   ]},
+   {name:"并立政权·辽金西夏", sub:"多民族并立", nodes:[
+     {name:"辽·西夏·金", b:"并立", years:"916–1234", tags:["多民族"], pts:["辽（契丹）916–1125","西夏（党项）1038–1227","金（女真）1115–1234，灭辽灭北宋"]},
+   ]},
+  ], to:{t:"war", l:"蒙古南下 → 元"}},
+
+ {id:"yuan", name:"元", years:"1271–1368", cap:"大都（北京）", span:"98年",
+  ov:"蒙古建立的大一统王朝，疆域空前辽阔，行省制影响深远。",
+  periods:[
+   {name:"蒙古崛起", sub:"成吉思汗", nodes:[
+     {name:"成吉思汗·铁木真", b:"蒙古", years:"1206起", tags:["草原霸主"], pts:["统一蒙古诸部","大举西征、疆域横跨欧亚"]},
+   ]},
+   {name:"大元一统", sub:"忽必烈与制度", nodes:[
+     {name:"元世祖·忽必烈", b:"元", years:"1271–1294", tags:["大一统"], pts:["1271建元、1279灭南宋统一","<b>行省制</b>、设宣政院管西藏","四等人制"]},
+   ]},
+   {name:"元末民变", sub:"红巾军 → 亡", nodes:[
+     {name:"元末", b:"衰世", years:"1294–1368", tags:["民变"], pts:["民族压迫、财政崩溃","<b>红巾军起义</b>（1351）","1368 朱元璋北伐，元亡"]},
+   ]},
+  ], to:{t:"normal", l:"朱元璋建明 → 明"}},
+
+ {id:"ming", name:"明", years:"1368–1644", cap:"南京 / 北京", span:"276年", full:true,
+  ov:"「天子守国门，君王死社稷」，皇权极盛、宦官专权，由洪武奠基到崇祯殉国。"},
+
+ {id:"qing", name:"清", years:"1636/1644–1912", cap:"北京", span:"268年",
+  ov:"满族建立的中国最后一个封建王朝，康雍乾极盛，晚清在列强冲击下走向终结。",
+  periods:[
+   {name:"崛起与入关", sub:"后金 → 清 → 入主中原", nodes:[
+     {name:"清太宗·皇太极", b:"清", years:"1636", tags:["改国号"], pts:["改「后金」为「清」"]},
+     {name:"顺治入关", b:"清", years:"1644", tags:["入主中原"], pts:["1644 入关、定都北京"]},
+   ]},
+   {name:"康乾盛世", sub:"康熙·雍正·乾隆", nodes:[
+     {name:"康熙·雍正·乾隆", b:"盛世", years:"1661–1795", tags:["极盛"], pts:["康熙：平三藩、收台湾、抗沙俄","雍正：摊丁入亩、设军机处","乾隆：<b>康乾盛世</b>、编《四库全书》"]},
+   ]},
+   {name:"晚清变局", sub:"列强冲击 → 自救", nodes:[
+     {name:"晚清", b:"晚清", years:"1840–1901", tags:["列强冲击"], pts:["<b>鸦片战争</b>（1840）、太平天国（1851）","洋务运动、甲午战争（1894）、戊戌变法（1898）","义和团运动、八国联军（1900）"]},
+   ]},
+   {name:"帝国终结", sub:"辛亥 → 退位", nodes:[
+     {name:"辛亥革命", b:"清末", years:"1911–1912", tags:["帝制终结"], pts:["<b>辛亥革命</b>（1911）","<b>1912 清帝退位</b>，两千年帝制结束"]},
+   ]},
+  ], to:{t:"normal", l:"帝制结束 → 中华民国"}},
+
+ {id:"roc", name:"民国", years:"1912–1949", cap:"南京", span:"大陆38年",
+  ov:"亚洲第一个共和国，历经军阀混战、北伐、抗战与内战。",
+  periods:[
+   {name:"共和肇建与军阀", sub:"1912 → 北洋", nodes:[
+     {name:"中华民国建立", b:"1912", years:"1912", tags:["共和肇建"], pts:["孙中山任临时大总统","结束两千年帝制"]},
+     {name:"北洋军阀时期", b:"北洋", years:"1912–1928", tags:["军阀混战"], pts:["军阀割据、政局动荡"]},
+   ]},
+   {name:"北伐与抗战", sub:"统一 → 抗战", nodes:[
+     {name:"北伐与统一", b:"国民革命", years:"1926–1928", tags:["形式统一"], pts:["国民革命军北伐","南京国民政府形式统一全国"]},
+     {name:"抗日战争", b:"抗战", years:"1931/1937–1945", tags:["民族危亡"], pts:["九一八事变（1931）","七七事变（1937）全面抗战","1945 抗战胜利"]},
+   ]},
+   {name:"内战与迁台", sub:"解放战争", nodes:[
+     {name:"解放战争", b:"内战", years:"1945–1949", tags:["政权更替"], pts:["1949 国民党退守台湾"]},
+   ]},
+  ], to:{t:"normal", l:"1949 → 中华人民共和国"}},
+
+ {id:"prc", name:"新中国", years:"1949–今", cap:"北京", span:"迄今",
+  ov:"中国共产党领导建立的中华人民共和国，从站起来、富起来到强起来。",
+  periods:[
+   {name:"建国与建设", sub:"1949 → 建设", nodes:[
+     {name:"中华人民共和国成立", b:"1949", years:"1949", tags:["建国"], pts:["1949.10.1 开国大典","社会主义制度确立"]},
+   ]},
+   {name:"改革开放", sub:"1978 → 富起来", nodes:[
+     {name:"改革开放", b:"1978", years:"1978起", tags:["富起来"], pts:["十一届三中全会、改革开放","经济高速发展、综合国力跃升"]},
+   ]},
+   {name:"新时代", sub:"2012 → 强起来", nodes:[
+     {name:"新时代", b:"2012–今", years:"2012–", tags:["强起来"], pts:["全面深化改革","民族伟大复兴新征程"]},
+   ]},
+  ], to:null},
+];
+
+/* 明：完整十六帝（按分期） */
+const MING_ERAS=[
+ {name:"开国奠基期", sub:"洪武 · 建文 · 永乐"},
+ {name:"仁宣盛世期", sub:"洪熙 · 宣德 · 明朝巅峰"},
+ {name:"王朝转折期", sub:"正统 · 景泰 · 土木堡起点"},
+ {name:"中期治乱交替", sub:"成化 · 弘治 · 正德"},
+ {name:"中后期拉锯时代", sub:"嘉靖 · 隆庆 · 万历"},
+ {name:"明末衰亡期", sub:"泰昌 · 天启 · 崇祯"},
+];
+const MING_EMP=[
+ {n:1,era:0,name:"朱元璋",temple:"明太祖",years:"洪武 1368–1398",tags:["开国皇帝","布衣天子"],pts:["灭元统一、恢复汉统、轻徭薄赋，<b>洪武之治</b>","废丞相、设锦衣卫、黄册鱼鳞图册、卫所制","<b>洪武四大案</b>清洗淮西勋贵"],link:{t:"normal",l:"传位皇太孙"}},
+ {n:2,era:0,name:"朱允炆",temple:"明惠宗",years:"建文 1399–1402",tags:["宽政改制","削藩"],pts:["宽政改制、大力削藩","<b>靖难之役</b>","南京城破、下落成谜、皇位被夺"],link:{t:"usurp",l:"靖难夺位 · 叔夺侄"}},
+ {n:3,era:0,name:"朱棣",temple:"明成祖",years:"永乐 1402–1424",tags:["靖难夺位","天子守国门"],pts:["迁都北京、修《永乐大典》、<b>郑和七下西洋</b>、五征漠北","设东厂、彻底削藩，皇权极盛"],link:{t:"normal",l:"传位长子"}},
+ {n:4,era:1,name:"朱高炽",temple:"明仁宗",years:"洪熙 1424–1425",tags:["在位仅十个月"],pts:["停劳民远征、赦建文旧臣、废苛政","开启<b>仁宣之治</b>"],link:{t:"normal",l:"传位长子"}},
+ {n:5,era:1,name:"朱瞻基",temple:"明宣宗",years:"宣德 1425–1435",tags:["盛世顶峰","蟋蟀天子"],pts:["政治清明、经济繁荣","平汉王朱高煦、放弃安南","设内书堂，<b>埋下宦官专权隐患</b>"],link:{t:"normal",l:"传位长子"}},
+ {n:6,era:2,name:"朱祁镇",temple:"明英宗",years:"正统/天顺 1435–1449·1457–1464",tags:["宦官乱政","两度在位"],tp:true,tpLabel:"⚡ 土木堡之变 · 由盛转衰",pts:["前期宠信王振、宦官乱政","<b>1449 土木堡之变</b>：皇帝被俘、精锐尽丧","夺门之变复辟、杀于谦","晚年废除殉葬"],link:{t:"war",l:"土木堡被俘 · 弟即位"}},
+ {n:7,era:2,name:"朱祁钰",temple:"明代宗",years:"景泰 1449–1457",tags:["临危受命"],pts:["任用于谦、<b>北京保卫战</b>挽救危局","夺门之变后被废、离奇病逝"],link:{t:"sib",l:"夺门之变 · 英宗复辟传子"}},
+ {n:8,era:3,name:"朱见深",temple:"明宪宗",years:"成化 1464–1487",tags:["幼年两立两废"],pts:["平反于谦、安抚荆襄流民","宠万贵妃、设西厂、汪直专权"],link:{t:"normal",l:"传位长子"}},
+ {n:9,era:3,name:"朱祐樘",temple:"明孝宗",years:"弘治 1487–1505",tags:["最完美皇帝","一夫一妻"],pts:["<b>弘治中兴</b>、拨乱反正、重用贤臣、国力回升"],link:{t:"normal",l:"传位长子"}},
+ {n:10,era:3,name:"朱厚照",temple:"明武宗",years:"正德 1505–1521",tags:["建豹房","宠刘瑾"],pts:["应州大捷","王阳明平宁王之乱","无子嗣，帝位转旁支"],link:{t:"branch",l:"无子 · 旁支入继"}},
+ {n:11,era:4,name:"朱厚熜",temple:"明世宗",years:"嘉靖 1521–1566",tags:["大礼议","二十年不上朝"],pts:["入继大统、<b>大礼议之争</b>","前期中兴、后期修道","严嵩专权、倭寇大乱、庚戌之变"],link:{t:"normal",l:"传位皇子"}},
+ {n:12,era:4,name:"朱载坖",temple:"明穆宗",years:"隆庆 1567–1572",tags:["短短六年","含金量极高"],pts:["<b>隆庆开关</b>（解除海禁）","<b>俺答封贡</b>（终结蒙古百年边患）","任用高拱、张居正，铺路改革"],link:{t:"normal",l:"传位皇子"}},
+ {n:13,era:4,name:"朱翊钧",temple:"明神宗",years:"万历 1572–1620",tags:["在位最长48年"],tp:true,tpLabel:"⚡ 怠政 + 后金崛起",pts:["前期张居正<b>一条鞭法</b>改革、国力极盛","<b>万历三大征</b>（宁夏·朝鲜·播州）","三十年不上朝、党争激烈","<b>努尔哈赤崛起、后金建立</b>"],link:{t:"normal",l:"传位长子"}},
+ {n:14,era:5,name:"朱常洛",temple:"明光宗",years:"泰昌 1620",tags:["在位仅一个月"],pts:["明末三大案之「<b>红丸案</b>」暴毙"],link:{t:"normal",l:"传位长子"}},
+ {n:15,era:5,name:"朱由校",temple:"明熹宗",years:"天启 1620–1627",tags:["木匠皇帝"],tp:true,tpLabel:"⚡ 阉党乱政 + 天灾",pts:["疏于朝政、木匠皇帝","<b>阉党巅峰</b>：魏忠贤专权、迫害东林党","辽东战局恶化","无子，传位弟弟"],link:{t:"sib",l:"无子 · 传位弟弟"}},
+ {n:16,era:5,name:"朱由检",temple:"明思宗",years:"崇祯 1627–1644",tags:["勤政","多疑"],pts:["开局铲除阉党","内：天灾、瘟疫、农民起义","外：满清入寇","<b>1644 煤山自缢</b>，明亡"],link:null},
+];
+// 把明转成 periods 结构
+DYN.find(d=>d.id==="ming").periods = MING_ERAS.map((e,idx)=>({name:e.name, sub:e.sub, nodes:MING_EMP.filter(x=>x.era===idx)}));
+
+/* ================= 渲染 ================= */
+const tabsEl=document.getElementById('tabs'), subnav=document.getElementById('subnav'), panels=document.getElementById('panels');
+const periodIndex={}; // dynId -> [{name,anchor}]
+
+function cardHTML(sym,node){
+  let h=`<div class="card ${node.tp?'tp':''}" data-n="${sym}">`;
+  if(node.tp&&node.tpLabel) h+=`<div class="tpflag">${node.tpLabel}</div>`;
+  h+=`<div class="top"><span class="name">${node.name}</span>`;
+  if(node.temple||node.b) h+=`<span class="temple">${node.temple||node.b}</span>`;
+  if(node.years) h+=`<span class="years">${node.years}</span>`;
+  h+=`</div>`;
+  if(node.tags&&node.tags.length) h+=`<div class="tags">${node.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>`;
+  h+=`<ul>${node.pts.map(p=>`<li>${p}</li>`).join("")}</ul></div>`;
+  return h;
+}
+function connHTML(link){ return link?`<div class="conn ${link.t}"><span>${link.l}</span></div>`:""; }
+
+/* 总览 */
+let ovRows=DYN.map(d=>`<div class="ovrow" data-goto="${d.id}">
+  <span class="dot" style="background:${d.full?'#a8322a':'#7d6a4f'}"></span>
+  <span class="ovname">${d.name}</span>
+  <span class="ovmeta"><span class="ovy">${d.years}</span><div class="ovf">${d.ov}</div></span>
+  <span class="arrow">›</span></div>`).join("");
+panels.innerHTML=`<section class="panel active" id="p-ov"><div class="dynhead">
+  <div class="dname">朝代总览</div>
+  <div class="dmeta"><span>秦 前221</span><span>→</span><span>今</span><span>两千两百余年</span></div>
+  <div class="dov">点任一朝代进入其时间线；进入后顶部第二行会出现该朝的「分期导航」。「明」为完整十六帝详版。</div>
+ </div><div class="ovlist">${ovRows}</div></section>`;
+
+tabsEl.insertAdjacentHTML('beforeend',`<button class="ov active" data-tab="ov">总览</button>`);
+const CN2=["一","二","三","四","五","六","七","八"];
+DYN.forEach(d=>{
+  let inner=`<div class="dynhead"><div class="dname">${d.name}</div>
+    <div class="dmeta"><span>年代 <b>${d.years}</b></span><span>都城 <b>${d.cap}</b></span><span>国祚 <b>${d.span}</b></span></div>
+    <div class="dov">${d.ov}</div></div>`;
+  let tl="";
+  periodIndex[d.id]=[];
+  d.periods.forEach((per,pi)=>{
+    const anchor=`era-${d.id}-${pi}`;
+    periodIndex[d.id].push({name:per.name, anchor});
+    tl+=`<div class="era" id="${anchor}"><span class="eno">${CN2[pi]||pi+1}</span><span class="ename">${per.name}</span><span class="esub">${per.sub||''}</span></div>`;
+    per.nodes.forEach((node,ni)=>{ tl+=cardHTML(String(ni+1),node); });
+    if(pi===d.periods.length-1 && d.to) tl+=connHTML(d.to);
+  });
+  inner+=`<div class="tl">${tl}</div>`;
+  panels.insertAdjacentHTML('beforeend',`<section class="panel" id="p-${d.id}">${inner}</section>`);
+  tabsEl.insertAdjacentHTML('beforeend',`<button data-tab="${d.id}">${d.name}</button>`);
+});
+
+let currentDyn="ov";
+function setTopbarH(){
+  const h=document.getElementById('topbar').offsetHeight;
+  document.documentElement.style.setProperty('--topbar',(h+8)+'px');
+}
+function buildSubnav(id){
+  if(id==='ov'||!periodIndex[id]){ subnav.classList.add('hide'); subnav.innerHTML=""; return; }
+  subnav.classList.remove('hide');
+  subnav.innerHTML=periodIndex[id].map((p,i)=>`<button data-anchor="${p.anchor}"><span class="sn">${CN2[i]||i+1}</span>${p.name}</button>`).join("");
+  subIO.observe && observePeriods(id);
+}
+function activate(id){
+  currentDyn=id;
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
+  const p=document.getElementById('p-'+id); if(p)p.classList.add('active');
+  const btn=document.querySelector(`.tabs button[data-tab="${id}"]`); if(btn)btn.scrollIntoView({inline:'center',block:'nearest'});
+  buildSubnav(id);
+  setTopbarH();
+  // 滚到该朝头部（避免被吸顶遮住）
+  const top=(p?p.getBoundingClientRect().top+window.scrollY:0)-(document.getElementById('topbar').offsetHeight)-6;
+  window.scrollTo({top:Math.max(0,top),behavior:'smooth'});
+  // 高亮第一个分期
+  setTimeout(()=>setActiveChip(0),60);
+}
+function setActiveChip(idx){
+  document.querySelectorAll('.subnav button').forEach((b,i)=>b.classList.toggle('active',i===idx));
+  const b=document.querySelectorAll('.subnav button')[idx]; if(b)b.scrollIntoView({inline:'center',block:'nearest'});
+}
+
+/* 点击分期导航 -> 跳转 */
+subnav.addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  const el=document.getElementById(b.dataset.anchor); if(!el)return;
+  const top=el.getBoundingClientRect().top+window.scrollY-(document.getElementById('topbar').offsetHeight)-4;
+  window.scrollTo({top:Math.max(0,top),behavior:'smooth'});
+});
+tabsEl.addEventListener('click',e=>{ const b=e.target.closest('button'); if(b)activate(b.dataset.tab); });
+panels.addEventListener('click',e=>{ const r=e.target.closest('.ovrow'); if(r&&r.dataset.goto)activate(r.dataset.goto); });
+
+/* 滚动时高亮当前分期 */
+let io=null;
+function observePeriods(id){
+  if(io)io.disconnect();
+  const eras=[...document.querySelectorAll(`#p-${id} .era`)];
+  io=new IntersectionObserver(entries=>{
+    // 取当前最靠上、可见的期
+    const vis=entries.filter(e=>e.isIntersecting);
+    if(vis.length){
+      const topOne=vis.reduce((a,b)=>a.boundingClientRect.top<b.boundingClientRect.top?a:b);
+      const idx=eras.indexOf(topOne.target);
+      if(idx>=0)setActiveChip(idx);
+    }
+  },{rootMargin:'-'+Math.round(document.getElementById('topbar').offsetHeight+10)+'px 0px -65% 0px',threshold:0});
+  eras.forEach(el=>io.observe(el));
+}
+const subIO={observe:true}; // 占位
+
+window.addEventListener('resize',()=>{ setTopbarH(); });
+setTopbarH();
+// hash 直达
+if(location.hash){ const h=location.hash.slice(1); if(document.getElementById('p-'+h)) activate(h); else if(h==='ov')activate('ov'); }
+</script>
+</body>
+</html>
