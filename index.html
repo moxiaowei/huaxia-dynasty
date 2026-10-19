@@ -126,6 +126,62 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
   .conn{margin-left:38px}
   .dynhead .dname{font-size:21px}
 }
+
+/* ===== 帝王详情 / 人物关系图 弹层 ===== */
+.card.clickable{cursor:pointer;transition:.18s}
+.card.clickable:hover{border-color:var(--gold);box-shadow:0 8px 26px rgba(200,90,30,.18);transform:translateY(-1px)}
+.card .clickhint{margin-top:9px;font-size:11.5px;color:var(--gold);font-weight:700;text-align:right;letter-spacing:.5px;border-top:1px dashed var(--line);padding-top:6px}
+.card .rel-line{margin:7px 0 1px;font-size:11.5px;color:var(--qing);background:#eef5f4;border-radius:8px;padding:4px 9px;border-left:3px solid var(--qing);line-height:1.5}
+
+.overlay{position:fixed;inset:0;z-index:200;background:rgba(40,20,10,.55);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;overflow-y:auto}
+.overlay.show{display:flex;animation:fade .2s ease}
+.sheet{background:var(--paper);width:100%;max-width:720px;min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,.45);animation:rise .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes rise{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.sheet-bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:9px;padding:12px 16px;
+  background:linear-gradient(135deg,#7d1f1a,#a8322a);color:var(--gold-l);border-bottom:2px solid var(--gold);box-shadow:0 3px 12px rgba(0,0,0,.25)}
+.sheet-bar .sname{font-family:"Songti SC","SimSun",serif;font-size:17.5px;font-weight:700;letter-spacing:1px;color:#f6e3ad}
+.sheet-bar .stemple{font-size:11px;background:rgba(255,255,255,.16);border-radius:5px;padding:2px 7px;color:#ffe9c2}
+.sheet-bar .sclose{margin-left:auto;font-size:24px;line-height:1;color:#ffe9c2;background:none;border:none;cursor:pointer;padding:0 6px;font-weight:300}
+.sheet-bar .sclose:active{color:#fff}
+.sheet-body{padding:16px 18px 48px}
+
+.dossier .sec{margin:0 0 15px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;box-shadow:var(--shadow)}
+.dossier .sec-h{font-family:"Songti SC",serif;font-size:15px;font-weight:700;color:var(--zhu-deep);margin-bottom:9px;display:flex;align-items:center;gap:8px}
+.dossier .sec-h .ico{width:23px;height:23px;border-radius:50%;background:linear-gradient(145deg,var(--zhu),var(--zhu-deep));color:var(--gold-l);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:0 0 auto;font-family:"Songti SC",serif}
+.dossier .bio{font-size:13px;color:var(--ink);line-height:1.7}
+.dossier .relbox{font-size:13px;color:#28504f;background:#eef5f4;border-radius:9px;padding:9px 12px;border-left:3px solid var(--qing);line-height:1.6}
+.dossier ul{list-style:none}
+.dossier li{position:relative;font-size:12.8px;padding-left:15px;margin:4px 0;line-height:1.55}
+.dossier li::before{content:"";position:absolute;left:2px;top:8px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.dossier li b{color:var(--zhu-deep)}
+.proscons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.proscons{grid-template-columns:1fr}}
+.pc{border-radius:11px;padding:10px 12px;font-size:12.5px;line-height:1.5}
+.pc.plus{background:#f1f8ee;border:1px solid #cfe3c4;border-left:4px solid #5a9b4a}
+.pc.minus{background:#fdf1ef;border:1px solid #eecdc8;border-left:4px solid #c0504a}
+.pc h4{font-size:12.5px;margin-bottom:6px}
+.pc.plus h4{color:#3d7a2e}
+.pc.minus h4{color:#a8322a}
+.pc ul{list-style:none;margin:0}
+.pc li{position:relative;padding-left:12px;color:var(--ink);margin:3px 0;line-height:1.5;font-size:12.3px}
+.pc li::before{content:"";position:absolute;left:2px;top:7px;width:4px;height:4px;border-radius:50%}
+.pc.plus li::before{background:#5a9b4a}
+.pc.minus li::before{background:#c0504a}
+
+.figmap{margin-top:4px}
+.figmap .map-h{font-family:"Songti SC",serif;font-size:16px;font-weight:700;color:var(--zhu-deep);margin:14px 0 3px;display:flex;align-items:center;gap:8px}
+.figmap .map-h .ico{width:23px;height:23px;border-radius:50%;background:linear-gradient(145deg,#d98b2b,#b8641a);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex:0 0 auto;font-family:"Songti SC",serif}
+.figmap .map-sub{font-size:12px;color:var(--ink-l);margin-bottom:14px;line-height:1.5}
+.figgroup{margin-bottom:15px}
+.figgroup .gname{font-size:12.5px;font-weight:700;color:#fff;display:inline-block;border-radius:6px;padding:3px 12px;margin-bottom:9px;letter-spacing:.5px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.figcards{display:flex;flex-direction:column;gap:7px}
+.figcard{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:9px 12px;box-shadow:0 2px 8px rgba(120,80,40,.06);border-left:4px solid var(--gold)}
+.figcard .fn{font-family:"Songti SC",serif;font-size:14.5px;font-weight:700;color:var(--zhu-deep)}
+.figcard .fr{font-size:10.5px;color:#fff;background:var(--qing);border-radius:5px;padding:1px 7px;margin-left:7px;font-weight:600;vertical-align:middle;white-space:nowrap}
+.figcard .fd{font-size:12.3px;color:var(--ink-l);margin-top:4px;line-height:1.55}
+.figflow{margin-top:6px;background:linear-gradient(135deg,#fbf6e9,#f5ecd5);border:1px dashed var(--gold);border-radius:11px;padding:12px 14px;font-size:12.5px;color:var(--ink);line-height:1.7}
+.figflow b{color:var(--zhu-deep)}
+.figflow .fh{font-weight:700;color:var(--zhu-deep);display:flex;align-items:center;gap:6px;margin-bottom:6px;font-family:"Songti SC",serif;font-size:13.5px}
 </style>
 </head>
 <body>
@@ -145,9 +201,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 
 <main class="wrap" id="panels"></main>
 
+<div class="overlay" id="overlay">
+  <div class="sheet" id="sheet">
+    <div class="sheet-bar">
+      <span class="sname" id="sh-name"></span>
+      <span class="stemple" id="sh-temple"></span>
+      <button class="sclose" id="sh-close" aria-label="关闭">×</button>
+    </div>
+    <div class="sheet-body" id="sheet-body"></div>
+  </div>
+</div>
+
 <footer class="wrap">
-  <div class="hint">顶部标签切朝代 · 第二行是分期导航（点击跳转、自动高亮）·「明」为完整十六帝详版</div>
-  <div class="copyright">华夏朝代脉络 · 秦→今　|　后续将逐朝细化代表人物与大事</div>
+  <div class="hint">顶部切朝代 · 第二行是分期导航 ·「明」为完整十六帝详版，点任意帝王卡看生平/评价/人物关系图谱</div>
+  <div class="copyright">华夏朝代脉络 · 秦→今　|　明史十六帝 · 帝王档案 + 人物关系图谱</div>
 </footer>
 
 <script>
@@ -351,39 +418,419 @@ const MING_ERAS=[
  {name:"明末衰亡期", sub:"泰昌 · 天启 · 崇祯"},
 ];
 const MING_EMP=[
- {n:1,era:0,name:"朱元璋",temple:"明太祖",years:"洪武 1368–1398",tags:["开国皇帝","布衣天子"],pts:["灭元统一、恢复汉统、轻徭薄赋，<b>洪武之治</b>","废丞相、设锦衣卫、黄册鱼鳞图册、卫所制","<b>洪武四大案</b>清洗淮西勋贵"],link:{t:"normal",l:"传位皇太孙"}},
- {n:2,era:0,name:"朱允炆",temple:"明惠宗",years:"建文 1399–1402",tags:["宽政改制","削藩"],pts:["宽政改制、大力削藩","<b>靖难之役</b>","南京城破、下落成谜、皇位被夺"],link:{t:"usurp",l:"靖难夺位 · 叔夺侄"}},
- {n:3,era:0,name:"朱棣",temple:"明成祖",years:"永乐 1402–1424",tags:["靖难夺位","天子守国门"],pts:["迁都北京、修《永乐大典》、<b>郑和七下西洋</b>、五征漠北","设东厂、彻底削藩，皇权极盛"],link:{t:"normal",l:"传位长子"}},
- {n:4,era:1,name:"朱高炽",temple:"明仁宗",years:"洪熙 1424–1425",tags:["在位仅十个月"],pts:["停劳民远征、赦建文旧臣、废苛政","开启<b>仁宣之治</b>"],link:{t:"normal",l:"传位长子"}},
- {n:5,era:1,name:"朱瞻基",temple:"明宣宗",years:"宣德 1425–1435",tags:["盛世顶峰","蟋蟀天子"],pts:["政治清明、经济繁荣","平汉王朱高煦、放弃安南","设内书堂，<b>埋下宦官专权隐患</b>"],link:{t:"normal",l:"传位长子"}},
- {n:6,era:2,name:"朱祁镇",temple:"明英宗",years:"正统/天顺 1435–1449·1457–1464",tags:["宦官乱政","两度在位"],tp:true,tpLabel:"⚡ 土木堡之变 · 由盛转衰",pts:["前期宠信王振、宦官乱政","<b>1449 土木堡之变</b>：皇帝被俘、精锐尽丧","夺门之变复辟、杀于谦","晚年废除殉葬"],link:{t:"war",l:"土木堡被俘 · 弟即位"}},
- {n:7,era:2,name:"朱祁钰",temple:"明代宗",years:"景泰 1449–1457",tags:["临危受命"],pts:["任用于谦、<b>北京保卫战</b>挽救危局","夺门之变后被废、离奇病逝"],link:{t:"sib",l:"夺门之变 · 英宗复辟传子"}},
- {n:8,era:3,name:"朱见深",temple:"明宪宗",years:"成化 1464–1487",tags:["幼年两立两废"],pts:["平反于谦、安抚荆襄流民","宠万贵妃、设西厂、汪直专权"],link:{t:"normal",l:"传位长子"}},
- {n:9,era:3,name:"朱祐樘",temple:"明孝宗",years:"弘治 1487–1505",tags:["最完美皇帝","一夫一妻"],pts:["<b>弘治中兴</b>、拨乱反正、重用贤臣、国力回升"],link:{t:"normal",l:"传位长子"}},
- {n:10,era:3,name:"朱厚照",temple:"明武宗",years:"正德 1505–1521",tags:["建豹房","宠刘瑾"],pts:["应州大捷","王阳明平宁王之乱","无子嗣，帝位转旁支"],link:{t:"branch",l:"无子 · 旁支入继"}},
- {n:11,era:4,name:"朱厚熜",temple:"明世宗",years:"嘉靖 1521–1566",tags:["大礼议","二十年不上朝"],pts:["入继大统、<b>大礼议之争</b>","前期中兴、后期修道","严嵩专权、倭寇大乱、庚戌之变"],link:{t:"normal",l:"传位皇子"}},
- {n:12,era:4,name:"朱载坖",temple:"明穆宗",years:"隆庆 1567–1572",tags:["短短六年","含金量极高"],pts:["<b>隆庆开关</b>（解除海禁）","<b>俺答封贡</b>（终结蒙古百年边患）","任用高拱、张居正，铺路改革"],link:{t:"normal",l:"传位皇子"}},
- {n:13,era:4,name:"朱翊钧",temple:"明神宗",years:"万历 1572–1620",tags:["在位最长48年"],tp:true,tpLabel:"⚡ 怠政 + 后金崛起",pts:["前期张居正<b>一条鞭法</b>改革、国力极盛","<b>万历三大征</b>（宁夏·朝鲜·播州）","三十年不上朝、党争激烈","<b>努尔哈赤崛起、后金建立</b>"],link:{t:"normal",l:"传位长子"}},
- {n:14,era:5,name:"朱常洛",temple:"明光宗",years:"泰昌 1620",tags:["在位仅一个月"],pts:["明末三大案之「<b>红丸案</b>」暴毙"],link:{t:"normal",l:"传位长子"}},
- {n:15,era:5,name:"朱由校",temple:"明熹宗",years:"天启 1620–1627",tags:["木匠皇帝"],tp:true,tpLabel:"⚡ 阉党乱政 + 天灾",pts:["疏于朝政、木匠皇帝","<b>阉党巅峰</b>：魏忠贤专权、迫害东林党","辽东战局恶化","无子，传位弟弟"],link:{t:"sib",l:"无子 · 传位弟弟"}},
- {n:16,era:5,name:"朱由检",temple:"明思宗",years:"崇祯 1627–1644",tags:["勤政","多疑"],pts:["开局铲除阉党","内：天灾、瘟疫、农民起义","外：满清入寇","<b>1644 煤山自缢</b>，明亡"],link:null},
+ {n:1,era:0,name:"朱元璋",temple:"明太祖",years:"洪武 1368–1398",
+  rel:"开国皇帝。濠州贫农出身，曾为僧、行乞，投红巾军而起，无前代可承。",
+  bio:"濠州钟离（今安徽凤阳）人，家贫，少时为地主放牛，后入皇觉寺为僧、流浪乞讨。25岁投郭子兴红巾军，逐步兼并群雄，1368年在应天（南京）称帝，国号大明，年号洪武。在位31年，勤政节俭、事必躬亲，以重典治乱世。",
+  tags:["开国皇帝","布衣天子"],pts:["灭元统一、恢复汉统、轻徭薄赋，<b>洪武之治</b>","废丞相、设锦衣卫、黄册鱼鳞图册、卫所制","<b>洪武四大案</b>清洗淮西勋贵"],
+  pros:["驱逐蒙元、恢复中华，结束元末乱世","勤于政事、体恤民力，轻徭薄赋、与民休息","整肃吏治、严惩贪腐，奠定大明276年基业"],
+  cons:["屡兴大狱（胡惟庸、蓝玉案），株连数万人","废丞相、集皇权于一身，开明代君主独裁之端","设锦衣卫、重典治民，法网严苛、士人畏惧"],
+  link:{t:"normal",l:"传位皇太孙"}},
+ {n:2,era:0,name:"朱允炆",temple:"明惠宗",years:"建文 1399–1402",
+  rel:"朱元璋之孙，太子朱标次子。父朱标早逝，以皇太孙身份继位。",
+  bio:"朱元璋长孙朱标早逝后，被立为皇太孙。即位后改元建文，推行宽政、锐意削藩，触动诸叔利益。燕王朱棣以「清君侧」起兵靖难，四年后南京城破，宫中火起，其下落成谜（一说自焚、一说出逃为僧）。",
+  tags:["宽政改制","削藩"],pts:["宽政改制、减轻赋役、重用文臣","大力削藩，逼反燕王朱棣","<b>靖难之役</b>失利，南京城破、下落成谜、皇位被夺"],
+  pros:["仁厚宽和、重用文臣，有重文治气象","锐意削藩，试图强化中央集权"],
+  cons:["削藩操之过急、手段失当，激成靖难","用人不当（李景隆屡败），军事上节节失利","在位仅四年，皇位被叔父所夺，结局成谜"],
+  link:{t:"usurp",l:"靖难夺位 · 叔夺侄"}},
+ {n:3,era:0,name:"朱棣",temple:"明成祖",years:"永乐 1402–1424",
+  rel:"朱元璋第四子，朱允炆之叔。以靖难之役夺侄皇位。",
+  bio:"朱元璋第四子，封燕王，镇守北平，久历战阵。靖难四年夺位，改元永乐。在位22年，五征漠北、迁都北京、修《永乐大典》、遣郑和下西洋，开创「永乐盛世」，但也以严酷手段巩固皇权、设东厂。",
+  tags:["靖难夺位","天子守国门"],pts:["迁都北京、修《永乐大典》、<b>郑和七下西洋</b>、五征漠北","设东厂、彻底削藩，皇权极盛","设内阁、重用宦官，影响明代政治格局"],
+  pros:["迁都北京、奠定「天子守国门」格局","郑和下西洋、宣扬国威，拓展海外影响","修《永乐大典》，集古文献之大成"],
+  cons:["靖难夺位，得国不正，屠戮建文旧臣（方孝孺诛十族）","设东厂、倚重宦官，开明代特务政治之端","五征漠北、下西洋耗费巨大，民力负担沉重"],
+  link:{t:"normal",l:"传位长子"}},
+ {n:4,era:1,name:"朱高炽",temple:"明仁宗",years:"洪熙 1424–1425",
+  rel:"朱棣长子。以皇太子继位，在位仅十个月。",
+  bio:"朱棣长子，体胖多病，但仁厚贤明，长期以太子身份监国理政。即位后改元洪熙，一改永乐朝的扩张与严苛，赦免建文旧臣、停止劳民远征、与民休息，开启「仁宣之治」。在位仅十个月即病逝。",
+  tags:["在位仅十个月","仁厚监国"],pts:["停劳民远征、罢下西洋宝船","赦建文旧臣、平反冤狱、废除苛政","开启<b>仁宣之治</b>，休养生息"],
+  pros:["仁厚宽和、拨乱反正，为仁宣之治奠基","监国多年、沉稳有度，善用文臣","停止虚耗国力之举，与民休息"],
+  cons:["在位仅十个月，很多改革未及展开","体弱多病，施政受健康所限"],
+  link:{t:"normal",l:"传位长子"}},
+ {n:5,era:1,name:"朱瞻基",temple:"明宣宗",years:"宣德 1425–1435",
+  rel:"朱高炽长子。以皇太子继位。",
+  bio:"朱高炽长子，自幼受祖父朱棣喜爱，多次随征漠北。即位后改元宣德，承父之政，政治清明、经济繁荣，与仁宗并称「仁宣之治」，为明朝国力巅峰。然设内书堂教宦官识字，埋下日后宦官专权隐患。",
+  tags:["盛世顶峰","蟋蟀天子"],pts:["政治清明、经济繁荣，<b>仁宣之治</b>顶峰","亲征平定汉王朱高煦叛乱、放弃安南","设内书堂教宦官读书，<b>埋下宦官专权隐患</b>"],
+  pros:["承仁宣之治，国力鼎盛、百姓富足","平汉王之乱、果断削藩，稳固皇权","知人善任，重用「三杨」等贤臣"],
+  cons:["设内书堂教宦官识字参政，为后世宦官乱政埋根","个人雅好斗蟋蟀（「促织天子」），被后世讥评","放弃安南，虽减负但也放弃了对交趾的经营"],
+  link:{t:"normal",l:"传位长子"}},
+ {n:6,era:2,name:"朱祁镇",temple:"明英宗",years:"正统/天顺 1435–1449·1457–1464",
+  rel:"朱瞻基长子。两度在位：正统朝先即位，土木堡被俘后由弟即位，复辟后又重登皇位。",
+  bio:"朱瞻基长子，九岁即位。前期宠信宦官王振，1449年听其怂恿亲征瓦剌，酿成土木堡之变，皇帝被俘、京营精锐尽丧。其弟朱祁钰即位。次年放还，被软禁南宫。1457年「夺门之变」复辟，改元天顺，冤杀于谦。晚年废除宫妃殉葬。",
+  tags:["宦官乱政","两度在位"],tp:true,tpLabel:"⚡ 土木堡之变 · 由盛转衰",pts:["前期宠信宦官王振、朝政败坏","<b>1449 土木堡之变</b>：皇帝被俘、精锐尽丧","夺门之变复辟、冤杀于谦","晚年废除宫妃殉葬制，尚存一善"],
+  pros:["晚年废除残酷的宫妃殉葬制度，是一大善政","复辟后任用李贤等，政局一度平稳"],
+  cons:["宠信王振、贸然亲征，酿成土木堡之变，明由盛转衰","复辟后冤杀北京保卫战的功臣于谦，自毁长城","两度在位，朝局动荡、党争埋根"],
+  link:{t:"war",l:"土木堡被俘 · 弟即位"}},
+ {n:7,era:2,name:"朱祁钰",temple:"明代宗",years:"景泰 1449–1457",
+  rel:"朱瞻基次子，朱祁镇之弟。兄被俘后以监国即位，兄终弟及。",
+  bio:"朱瞻基次子，本为郕王。土木堡之变后临危受命，由监国而即位，改元景泰。重用于谦打赢北京保卫战，挽救明朝于危亡。在位后期因易储、软禁还朝的英宗而失人心，夺门之变后被废，不久病逝。",
+  tags:["临危受命","北京保卫战"],pts:["临危受命、任用于谦","<b>北京保卫战</b>击退瓦剌、挽救危局","易储风波失人心，夺门之变后被废、离奇病逝"],
+  pros:["危难之际挺身而出，稳定朝局","重用于谦打赢北京保卫战，保全社稷"],
+  cons:["废黜英宗之子、改立己子为太子，招致非议","软禁还朝的英宗，兄弟失和","夺门之变后遭废，身后不入太庙"],
+  link:{t:"sib",l:"夺门之变 · 英宗复辟传子"}},
+ {n:8,era:3,name:"朱见深",temple:"明宪宗",years:"成化 1464–1487",
+  rel:"朱祁镇长子。以皇太子继位（幼年曾两立两废）。",
+  bio:"朱祁镇长子，幼年因父被俘、复辟等变故而两立两废。即位后改元成化，平反于谦、安抚荆襄流民，然专宠年长十七岁的万贵妃，设西厂、用宦官汪直，朝政渐染弊病。",
+  tags:["幼年两立两废","宠万贵妃"],pts:["平反于谦、安抚荆襄流民","宠万贵妃、设西厂、汪直专权","成化朝相对安定，但特务政治抬头"],
+  pros:["平反于谦冤案，昭雪忠良","安置荆襄流民，缓解社会矛盾"],
+  cons:["专宠万贵妃，后宫干政、外戚得势","设西厂、用汪直，宦官特务横行","晚年怠政，朝纲渐弛"],
+  link:{t:"normal",l:"传位长子"}},
+ {n:9,era:3,name:"朱祐樘",temple:"明孝宗",years:"弘治 1487–1505",
+  rel:"朱见深第三子。以皇太子继位。",
+  bio:"朱见深第三子，幼年因万贵妃所害而坎坷。即位后改元弘治，勤政节俭、重用贤臣、拨乱反正，史称「弘治中兴」。且终身只娶张皇后一人，不纳妃嫔，是中国历史上罕见的「一夫一妻」皇帝。",
+  tags:["最完美皇帝","一夫一妻"],pts:["<b>弘治中兴</b>：拨乱反正、重用贤臣、国力回升","勤政节俭、恭俭有制，君臣和睦","终身只娶张皇后一人，一夫一妻"],
+  pros:["勤政爱民、宽厚仁和，史称「弘治中兴」","重用刘健、李东阳、谢迁等贤臣","一夫一妻、恭俭自律，私德极佳，后世评价极高"],
+  cons:["对外趋于保守，边患应对略显消极","身体素弱、英年早逝（36岁），改革未能更深","过度宽厚，对勋贵、宦官的约束有时偏软"],
+  link:{t:"normal",l:"传位长子"}},
+ {n:10,era:3,name:"朱厚照",temple:"明武宗",years:"正德 1505–1521",
+  rel:"朱祐樘长子。以皇太子继位，无子嗣，帝位转旁支。",
+  bio:"朱祐樘独子，幼年娇惯。即位后改元正德，荒嬉好武，建「豹房」、宠宦官刘瑾等「八虎」，自封「总督军务威武大将军」亲征。虽荒唐，却在应州大捷中亲征退敌。无子而崩，帝位转予旁支。",
+  tags:["建豹房","宠刘瑾"],pts:["宠宦官刘瑾等「八虎」，刘瑾专权后伏诛","荒嬉建豹房、自封大将军，多次出巡","应州大捷亲征退敌；王阳明平宁王之乱","无子嗣，帝位转旁支"],
+  pros:["应州之战亲征退蒙古，颇有武略","王阳明平宁王之乱，用人不拘一格"],
+  cons:["荒嬉无度、建豹房、宠「八虎」，朝政败坏","刘瑾专权、特务横行，正德朝政治黑暗","无子而崩，引发继统之争（旁支入继）"],
+  link:{t:"branch",l:"无子 · 旁支入继"}},
+ {n:11,era:4,name:"朱厚熜",temple:"明世宗",years:"嘉靖 1521–1566",
+  rel:"朱厚照堂弟，兴献王朱祐杬之子、朱祐樘之侄。以藩王入继大统（兄终弟及之变通）。",
+  bio:"兴献王之子，武宗无子，以「兄终弟及」入继大统，改元嘉靖。即位初发动「大礼议」，追尊生父，击垮杨廷和集团、确立皇权。前期励精图治，后期崇道修玄、二十年不上朝，严嵩专权、倭寇猖獗。",
+  tags:["大礼议","二十年不上朝"],pts:["以藩王入继、<b>大礼议之争</b>确立皇权","前期「嘉靖中兴」，后期崇道怠政","严嵩专权、倭寇大乱、庚戌之变","海瑞上《治安疏》直斥其非"],
+  pros:["大礼议中展现强硬手腕，强化皇权","前期励精图治，一度有中兴气象","抗倭中后期任用戚继光、俞大猷，渐次平倭"],
+  cons:["崇道修玄、二十年不上朝，怠于政事","宠信严嵩父子，专权贪腐近二十年","大礼议打压言路、廷杖群臣，士风受挫"],
+  link:{t:"normal",l:"传位皇子"}},
+ {n:12,era:4,name:"朱载坖",temple:"明穆宗",years:"隆庆 1567–1572",
+  rel:"朱厚熜第三子。以皇太子继位。",
+  bio:"朱厚熜第三子，即位后改元隆庆。在位仅六年，却办成两件大事：解除海禁（隆庆开关）、与蒙古俺答达成封贡互市，终结百年边患。内阁徐阶、高拱、张居正等人才济济，为万历改革铺路。",
+  tags:["短短六年","含金量极高"],pts:["<b>隆庆开关</b>：解除海禁、开放月港","<b>俺答封贡</b>：终结蒙古百年边患","任用徐阶、高拱、张居正，铺路改革"],
+  pros:["隆庆开关、俺答封贡，两大善政惠及深远","用人不疑，放手内阁贤臣理政","短短六年，奠定万历中兴基础"],
+  cons:["在位仅六年，许多政策未及巩固","本人性格宽和近于软弱，倚重阁臣","后宫与内监仍有干政之弊"],
+  link:{t:"normal",l:"传位皇子"}},
+ {n:13,era:4,name:"朱翊钧",temple:"明神宗",years:"万历 1572–1620",
+  rel:"朱载坖第三子。以皇太子继位（十岁冲龄即位）。",
+  bio:"朱载坖第三子，十岁即位，改元万历，在位48年，为明朝在位最久的皇帝。前期由张居正辅政、推行一条鞭法，国力极盛，史称「万历中兴」；张居正死后亲政，因「国本之争」与群臣对抗，后期三十年不上朝，党争激化、后金崛起。",
+  tags:["在位最长48年"],tp:true,tpLabel:"⚡ 怠政 + 后金崛起",pts:["前期张居正<b>一条鞭法</b>改革、国力极盛","<b>万历三大征</b>（宁夏·朝鲜·播州）皆胜","三十年不上朝、党争激烈","<b>努尔哈赤崛起、后金建立</b>"],
+  pros:["前期张居正改革，国力达到晚明顶峰","万历三大征皆胜，援朝抗倭扬威东亚","在位最长，前期政局稳定、经济繁荣"],
+  cons:["国本之争僵持、后期三十年怠政","矿监税使横征暴敛，民怨沸腾","党争激化、边备废弛，后金坐大（萨尔浒之败）"],
+  link:{t:"normal",l:"传位长子"}},
+ {n:14,era:5,name:"朱常洛",temple:"明光宗",years:"泰昌 1620",
+  rel:"朱翊钧长子。以皇太子继位，在位仅一个月。",
+  bio:"朱翊钧长子，因「国本之争」苦熬近二十年才被立为太子。即位后改元泰昌，然纵欲致病，服鸿胪寺丞李可灼所进「红丸」后暴毙，在位仅一个月，为明末「三大案」（梃击、红丸、移宫）的关键人物。",
+  tags:["在位仅一个月","红丸案"],pts:["明末三大案之「<b>红丸案</b>」暴毙","即位即病、纵欲伤身","短暂在位，党争进一步激化"],
+  pros:["即位初发银犒军、罢矿税，有恤民之意","身处国本之争而不失储位，隐忍多年"],
+  cons:["纵欲享乐、即位即病，毫无作为","服红丸暴毙，引发党争与宫廷疑案","「三大案」交织，成为晚明党争导火索"],
+  link:{t:"normal",l:"传位长子"}},
+ {n:15,era:5,name:"朱由校",temple:"明熹宗",years:"天启 1620–1627",
+  rel:"朱常洛长子。以皇太子继位，无子，传位弟弟。",
+  bio:"朱常洛长子，即位后改元天启。痴迷木工，人称「木匠皇帝」，疏于朝政。宦官魏忠贤与乳母客氏勾结，阉党专权达到顶峰，残酷迫害东林党人。辽东战局靠孙承宗、袁崇焕苦撑。无子，传位其弟朱由检。",
+  tags:["木匠皇帝"],tp:true,tpLabel:"⚡ 阉党乱政 + 天灾",pts:["疏于朝政、痴迷木工，「木匠皇帝」","<b>阉党巅峰</b>：魏忠贤专权、迫害东林党","辽东战局恶化、熊廷弼冤死","无子，传位弟弟"],
+  pros:["任凭朝政败坏，但东林—阉党间尚有一线人才支撑辽东"],
+  cons:["痴迷木工、不理朝政，皇权旁落","魏忠贤、客氏专权，阉党迫害东林六君子","冤杀辽东经略熊廷弼，自毁长城","天灾频仍（王恭厂大爆炸），国势急转直下"],
+  link:{t:"sib",l:"无子 · 传位弟弟"}},
+ {n:16,era:5,name:"朱由检",temple:"明思宗",years:"崇祯 1627–1644",
+  rel:"朱常洛第五子，朱由校之弟。兄无子，以兄终弟及即位。",
+  bio:"朱常洛第五子，兄熹宗无子，以信王入继，改元崇祯。即位即铲除魏忠贤、勤政节俭，然刚愎多疑、用人失当。内逢天灾瘟疫、农民起义，外临后金（清）压境，终在1644年李自成破北京时于煤山自缢，明亡。",
+  tags:["勤政","多疑"],pts:["开局铲除阉党、勤政节俭","内：天灾、瘟疫、农民起义蜂起","外：后金（清）入寇、松锦失守","<b>1644 煤山自缢</b>，明亡"],
+  pros:["铲除阉党、勤于政事、自奉节俭","明知不可为而为之，殉国守节「君王死社稷」"],
+  cons:["刚愎多疑、频繁换相（十七年五十相）","中反间计冤杀袁崇焕，自坏长城","内外交困下无力回天，终致亡国（非亡国之君，而当亡国之运）"],
+  link:null},
 ];
-// 把明转成 periods 结构
-DYN.find(d=>d.id==="ming").periods = MING_ERAS.map((e,idx)=>({name:e.name, sub:e.sub, nodes:MING_EMP.filter(x=>x.era===idx)}));
+/* ================= 明·各时期主要人物关系图谱（点击帝王卡弹出） ================= */
+const MING_FIGS={
+ 1:{title:"洪武朝 · 开国功臣集团",sub:"淮西武将集团与浙东谋士集团并立，共辅朱元璋定天下。",
+  groups:[
+   {g:"开国六名将",color:"#a8322a",members:[
+     {n:"徐达",r:"开国第一功臣",d:"朱元璋同乡。统兵灭元、攻克大都，为人谨慎、善抚士卒，封魏国公，善终。"},
+     {n:"常遇春",r:"猛将·先锋",d:"「常十万」，勇冠三军、每战先登，与徐达并称「徐常」，北伐途中暴卒。"},
+     {n:"李文忠",r:"宗室外甥",d:"朱元璋外甥、养子。骁勇善战，破张士诚、北伐元廷，封曹国公。"},
+     {n:"邓愈",r:"名将",d:"少年起兵，平江西、定吐蕃，随徐达北伐，封卫国公，班师途中病卒。"},
+     {n:"汤和",r:"老将·引路人",d:"朱元璋同乡发小，引其投红巾军。沉稳谨慎，主动交兵权，为少数善终的开国元勋。"},
+     {n:"沐英",r:"养子·世镇云南",d:"朱元璋义子。平定云南后留镇，沐氏世守云南近三百年。"},
+   ]},
+   {g:"谋臣文臣",color:"#3a6b6b",members:[
+     {n:"刘基（刘伯温）",r:"谋主·军师",d:"浙东名士，「三分天下诸葛亮，一统江山刘伯温」。定「先陈后张」战略，助朱元璋削平群雄，封诚意伯。"},
+     {n:"李善长",r:"开国文臣之首",d:"掌后勤、定制度，比之萧何，封韩国公。后因胡惟庸案被赐死。"},
+     {n:"宋濂",r:"文宗·太子师",d:"开国文臣、一代文宗，总裁修《元史》，为太子朱标之师。"},
+   ]},
+   {g:"皇族宗亲",color:"#7d6a4f",members:[
+     {n:"马皇后",r:"结发贤后",d:"朱元璋元配，患难与共，屡次谏阻杀戮，为一代贤后。"},
+     {n:"朱标",r:"太子",d:"朱元璋长子，仁厚，早逝，其子朱允炆继位（建文）。"},
+     {n:"朱棣",r:"燕王",d:"朱元璋第四子，镇北平，后发动靖难夺位（永乐帝）。"},
+   ]},
+  ],
+  flow:"<b>淮西集团</b>（徐达、汤和、李善长等凤阳同乡）是朱元璋的基本盘，手握兵权与后勤；<b>浙东集团</b>（刘基、宋濂）以谋略文治见长。两派并立、相互制衡。天下既定，朱元璋借胡惟庸案、蓝玉案等大肆清洗淮西勋贵，开国元勋几被屠戮殆尽，皇权空前集中。"},
+
+ 2:{title:"建文朝 · 削藩与靖难",sub:"文臣集团力主削藩，与燕王朱棣的军事集团正面冲突。",
+  groups:[
+   {g:"建文核心文臣",color:"#3a6b6b",members:[
+     {n:"齐泰",r:"兵部尚书",d:"建文帝心腹，力主削藩，靖难后被杀。"},
+     {n:"黄子澄",r:"削藩谋主",d:"太常寺卿，削藩主要策划者，后被杀。"},
+     {n:"方孝孺",r:"天下读书种子",d:"翰林学士、一代大儒。拒为朱棣草拟即位诏书，被诛「十族」，气节为后世所仰。"},
+   ]},
+   {g:"宗室与对手",color:"#a8322a",members:[
+     {n:"燕王朱棣",r:"叔·起兵靖难",d:"朱元璋第四子，以「清君侧、靖国难」为名起兵，四年后攻入南京夺位。"},
+     {n:"宁王朱权",r:"被裹挟的藩王",d:"拥精锐「朵颜三卫」，被朱棣设计裹挟，助其靖难。"},
+     {n:"李景隆",r:"统帅·屡败",d:"建文任命的征燕主帅，屡战屡败，金川门之役开门降燕。"},
+   ]},
+  ],
+  flow:"建文帝用齐泰、黄子澄之谋仓促削藩，逼反实力最强的燕王朱棣；又错用纨绔李景隆为帅，丧师失地。朱棣长驱直入，金川门守军迎降，南京陷落。方孝孺拒写诏书、被诛十族，建文旧臣多遭屠戮，建文帝下落成谜。"},
+
+ 3:{title:"永乐朝 · 靖难功臣与内阁",sub:"夺位后倚重靖难武将、内阁文臣与宦官三股力量。",
+  groups:[
+   {g:"靖难功臣",color:"#a8322a",members:[
+     {n:"姚广孝（道衍）",r:"黑衣宰相·首谋",d:"僧人，靖难首谋，劝朱棣起兵、运筹帷幄，功居第一，人称「黑衣宰相」。"},
+     {n:"张玉",r:"靖难第一将",d:"东昌之战为救朱棣力战而死，靖难第一功臣。"},
+     {n:"朱能",r:"猛将",d:"靖难主将，屡破南军，封成国公。"},
+     {n:"丘福",r:"靖难宿将",d:"靖难功臣，后北征鞑靼轻敌战殁。"},
+   ]},
+   {g:"内阁文臣",color:"#3a6b6b",members:[
+     {n:"解缙",r:"《永乐大典》总裁",d:"才子，主持编纂《永乐大典》，后因立储事获罪下狱致死。"},
+     {n:"杨士奇",r:"内阁·三杨之首",d:"历仕五朝，与杨荣、杨溥并称「三杨」，为仁宣之治砥柱。"},
+   ]},
+   {g:"外交与宦官",color:"#7d6a4f",members:[
+     {n:"郑和",r:"七下西洋",d:"宦官，率庞大船队七下西洋，宣扬国威、拓展朝贡贸易。"},
+     {n:"陈诚",r:"出使西域",d:"多次出使西域，重建与中亚的朝贡往来。"},
+   ]},
+  ],
+  flow:"朱棣以<b>姚广孝</b>为谋主、<b>张玉·朱能</b>为锋刃夺得天下；即位后设内阁、倚重<b>三杨</b>治国，又以宦官<b>郑和</b>下西洋、<b>陈诚</b>通西域宣扬国威。文武之外另设东厂，皇权与特务并行，格局影响整个明代。"},
+
+ 4:{title:"洪熙朝 · 仁宣文臣集团",sub:"朱高炽监国多年，倚重文臣，开启仁宣之治。",
+  groups:[
+   {g:"内阁三杨",color:"#3a6b6b",members:[
+     {n:"杨士奇",r:"内阁·首辅",d:"历仕五朝、为人宽厚，仁宣之治核心辅臣。"},
+     {n:"杨荣",r:"内阁·善断",d:"机敏善谋、通晓边务，与士奇互补。"},
+     {n:"杨溥",r:"内阁·端谨",d:"为人端谨，狱中苦读十年，后入阁。"},
+   ]},
+   {g:"理财能臣",color:"#a8322a",members:[
+     {n:"夏原吉",r:"户部尚书",d:"明代理财名臣，永乐朝因谏北征下狱，洪熙即位即释放重用。"},
+     {n:"蹇义",r:"吏部尚书",d:"掌铨选多年，为人谨慎老成。"},
+   ]},
+  ],
+  flow:"朱高炽以太子身份长期监国，深得文臣拥戴。即位即倚重<b>「三杨」</b>与理财名臣<b>夏原吉、蹇义</b>，赦建文旧臣、停虚耗之举、与民休息，短短十个月奠定「仁宣之治」的国策基调。"},
+
+ 5:{title:"宣德朝 · 仁宣之治顶峰",sub:"承父之政，三杨辅政，国力鼎盛。",
+  groups:[
+   {g:"台阁重臣",color:"#3a6b6b",members:[
+     {n:"杨士奇·杨荣·杨溥",r:"「三杨」辅政",d:"三杨同心辅政，与蹇义、夏原吉共襄仁宣之治，为明代文臣政治的高光期。"},
+     {n:"蹇义·夏原吉",r:"六部元老",d:"老成持重，稳定朝局。"},
+   ]},
+   {g:"宗室",color:"#a8322a",members:[
+     {n:"汉王朱高煦",r:"叛乱被平",d:"朱棣次子，宣德元年效父「靖难」起兵，被宣宗亲征平定。"},
+   ]},
+  ],
+  flow:"宣宗承仁宗之政，重用<b>三杨</b>与六部元老，君臣相得、政治清明，仁宣之治达于顶峰。然设内书堂教宦官识字参政，虽一时无碍，却为后来的<b>王振专权</b>埋下隐患。"},
+
+ 6:{title:"正统/天顺朝 · 土木堡与夺门",sub:"以王振、于谦、石亨为核心的剧烈动荡期。",
+  groups:[
+   {g:"宦官",color:"#7d1f1a",members:[
+     {n:"王振",r:"司礼监·祸首",d:"英宗宠信，怂恿亲征致土木堡之变，自己也死于乱军。"},
+   ]},
+   {g:"武将",color:"#a8322a",members:[
+     {n:"张辅",r:"四朝老将",d:"随征土木堡，年逾七旬殁于乱军，一代名将殒落。"},
+     {n:"石亨",r:"夺门功臣",d:"北京保卫战有功，后参与夺门之变，骄横谋反下狱死。"},
+     {n:"也先",r:"瓦剌太师",d:"土木堡俘英宗，挟以叩关，被于谦击退于北京城下。"},
+   ]},
+   {g:"文臣",color:"#3a6b6b",members:[
+     {n:"于谦",r:"兵部尚书·社稷臣",d:"土木堡后拥立景泰、打赢北京保卫战，挽大明于既倒；英宗复辟后遭冤杀。"},
+     {n:"徐有贞·曹吉祥",r:"夺门同谋",d:"与石亨合谋发动夺门之变，助英宗复辟。"},
+   ]},
+  ],
+  flow:"英宗宠信宦官<b>王振</b>，1449年贸然亲征瓦剌，酿<b>土木堡之变</b>，皇帝被俘、精锐尽丧。危急关头<b>于谦</b>拥立景泰帝、打赢北京保卫战，力挽狂澜。八年后英宗借<b>石亨、徐有贞</b>发动<b>夺门之变</b>复辟，冤杀于谦——忠臣与社稷的悲剧，成为明代由盛转衰的缩影。"},
+
+ 7:{title:"景泰朝 · 北京保卫战",sub:"于谦临危受命，挽社稷于将倾。",
+  groups:[
+   {g:"中流砥柱",color:"#3a6b6b",members:[
+     {n:"于谦",r:"兵部尚书",d:"临危受命，反对南迁、拥立景泰，亲自督战北京九门，击退瓦剌，救大明于危亡。"},
+     {n:"石亨",r:"总兵",d:"北京保卫战中有功，封侯；后因私怨参与夺门之变。"},
+     {n:"王文",r:"内阁",d:"景泰朝重臣，夺门之变后与于谦同被杀。"},
+   ]},
+   {g:"被软禁者",color:"#a8322a",members:[
+     {n:"朱祁镇",r:"太上皇",d:"土木堡被俘放还后，被景泰帝软禁于南宫。"},
+   ]},
+  ],
+  flow:"土木堡后，<b>于谦</b>挺身而出，力排南迁之议，拥立郕王即位（景泰）、整饬京营，赢得<b>北京保卫战</b>，保全社稷。然景泰帝易储、软禁英宗，人心渐失。夺门之变起，于谦、王文遇害，一代社稷臣含冤而死。"},
+
+ 8:{title:"成化朝 · 万贵妃与西厂",sub:"宠妃干政、宦官特务并起的时期。",
+  groups:[
+   {g:"后宫",color:"#a8322a",members:[
+     {n:"万贵妃",r:"专宠·长帝17岁",d:"自幼照料宪宗，专宠后宫，恃宠而骄，左右朝局。"},
+   ]},
+   {g:"宦官",color:"#7d1f1a",members:[
+     {n:"汪直",r:"西厂提督",d:"设西厂，权倾一时，屡兴大狱、特务横行。"},
+   ]},
+   {g:"阁臣",color:"#3a6b6b",members:[
+     {n:"商辂",r:"阁臣·直谏",d:"三朝元老、连中三元，屡谏汪直、力请罢西厂。"},
+     {n:"彭时",r:"阁臣",d:"端谨贤相，与商辂共持正议。"},
+     {n:"原杰",r:"抚治流民",d:"招抚荆襄流民，设郧阳府妥善安置，缓和矛盾。"},
+   ]},
+  ],
+  flow:"宪宗宠<b>万贵妃</b>，后宫干预朝局；又设<b>西厂</b>、用宦官<b>汪直</b>，特务政治愈演愈烈。阁臣<b>商辂、彭时</b>屡次谏阻。宪宗亦平反于谦、招抚荆襄流民，功过并存。"},
+
+ 9:{title:"弘治朝 · 弘治中兴",sub:"明君贤臣，君臣相得的黄金时代。",
+  groups:[
+   {g:"弘治三君子",color:"#3a6b6b",members:[
+     {n:"刘健",r:"内阁首辅",d:"刚正持重，为弘治朝第一辅臣。"},
+     {n:"李东阳",r:"内阁·文坛领袖",d:"才华横溢，主盟文坛，与刘健、谢迁同心辅政。"},
+     {n:"谢迁",r:"内阁·直臣",d:"为人刚直，敢于直谏，弘治朝骨干。"},
+   ]},
+   {g:"六部贤臣",color:"#a8322a",members:[
+     {n:"王恕",r:"吏部尚书",d:"刚正敢言，掌铨选、澄清吏治。"},
+     {n:"马文升",r:"兵部尚书",d:"老成谋国，整饬边务、安定边陲。"},
+     {n:"刘大夏",r:"户部·理财",d:"清廉干练，理财有方，屡陈民间疾苦。"},
+   ]},
+   {g:"后宫",color:"#7d6a4f",members:[
+     {n:"张皇后",r:"唯一的皇后",d:"孝宗终身只娶张皇后一人，一夫一妻，为千古佳话。"},
+   ]},
+  ],
+  flow:"孝宗即位拨乱反正，重用<b>刘健、李东阳、谢迁</b>「弘治三君子」及王恕、马文升、刘大夏等贤臣，君臣同心、政治清明，史称<b>弘治中兴</b>。更难得的是他终身只娶<b>张皇后</b>一人，一夫一妻、恭俭自律，后世誉为明代最好的皇帝。"},
+
+ 10:{title:"正德朝 · 豹房与刘瑾",sub:"荒唐天子与权宦、佞幸、能臣交织。",
+  groups:[
+   {g:"宦官八虎",color:"#7d1f1a",members:[
+     {n:"刘瑾",r:"司礼监·专权",d:"「八虎」之首，专权乱政、贪腐无度，后被凌迟处死于市。"},
+     {n:"马永成·谷大用",r:"八虎成员",d:"与刘瑾结党，把持内廷。"},
+   ]},
+   {g:"阁臣",color:"#3a6b6b",members:[
+     {n:"杨廷和",r:"内阁首辅",d:"屡屡抗争、力遏宦祸，为朝中正派领袖。"},
+   ]},
+   {g:"能臣与佞幸",color:"#a8322a",members:[
+     {n:"王阳明",r:"平宁王·心学宗师",d:"以右佥都御史迅速平定宁王之乱，又开创阳明心学。"},
+     {n:"江彬·钱宁",r:"边将佞幸",d:"诱导武宗巡游、骄横跋扈，加速朝政败坏。"},
+   ]},
+  ],
+  flow:"武宗宠<b>宦官刘瑾</b>等「八虎」，刘瑾专权、旋被凌迟伏诛。皇帝荒嬉建<b>豹房</b>、自封「威武大将军」四处巡游，宠信<b>江彬、钱宁</b>等佞幸。幸有阁臣<b>杨廷和</b>力撑、<b>王阳明</b>平宁王之乱，方未致大乱。武宗无子而崩，引发旁支入继。"},
+
+ 11:{title:"嘉靖朝 · 大礼议与严嵩",sub:"从大礼议夺权到严嵩专权、倭寇大炽。",
+  groups:[
+   {g:"大礼议两派",color:"#3a6b6b",members:[
+     {n:"杨廷和",r:"旧派领袖",d:"主张世宗以孝宗为父，力争礼仪，后被迫致仕。"},
+     {n:"张璁·桂萼",r:"新政派",d:"迎合世宗尊崇生父，助其打赢大礼议，获重用。"},
+   ]},
+   {g:"权奸",color:"#7d1f1a",members:[
+     {n:"严嵩",r:"首辅·专权20年",d:"以青词得宠，专权贪腐近二十年，后败落饿死墓舍。"},
+     {n:"严世蕃",r:"严嵩之子",d:"依仗父势、贪婪弄权，后被处斩。"},
+     {n:"夏言",r:"前首辅",d:"力主收复河套，被严嵩构陷杀害。"},
+     {n:"徐阶",r:"后首辅·扳倒严嵩",d:"隐忍蓄势，最终参倒严嵩，为一代能相。"},
+   ]},
+   {g:"名臣良将",color:"#a8322a",members:[
+     {n:"海瑞",r:"直臣·海青天",d:"上《治安疏》直斥皇帝，抬棺死谏，以清廉刚直名世。"},
+     {n:"戚继光",r:"抗倭名将",d:"编练戚家军，荡平东南倭寇，后镇蓟北御蒙古。"},
+     {n:"俞大猷",r:"抗倭名将",d:"与戚继光并称「俞龙戚虎」，转战东南、平定倭患。"},
+     {n:"陆炳",r:"锦衣卫都督",d:"世宗乳兄弟，掌锦衣卫，权势极盛。"},
+   ]},
+  ],
+  flow:"世宗以藩王入继，借<b>大礼议</b>击垮杨廷和集团，皇权空前强化。前期励精图治，后期崇道不上朝，<b>严嵩</b>父子专权二十年，<b>夏言</b>被害。<b>徐阶</b>隐忍蓄势终扳倒严嵩；<b>海瑞</b>抬棺上疏死谏；东南倭患则由<b>戚继光、俞大猷</b>渐次荡平。"},
+
+ 12:{title:"隆庆朝 · 开关与封贡",sub:"六年之中办成开关、封贡两件大事。",
+  groups:[
+   {g:"内阁三巨头",color:"#3a6b6b",members:[
+     {n:"徐阶",r:"首辅",d:"嘉靖末扳倒严嵩，隆庆初主持朝政。"},
+     {n:"高拱",r:"首辅·干才",d:"干练果决、锐意任事，后与张居正争权落败。"},
+     {n:"张居正",r:"内阁·改革家",d:"入阁参与机务，为万历大改革埋下伏笔。"},
+   ]},
+   {g:"封贡·边防",color:"#a8322a",members:[
+     {n:"王崇古·方逢时",r:"俺答封贡促成者",d:"招降俺答之孙，促成封贡互市，终结蒙古百年边患。"},
+     {n:"谭纶·戚继光",r:"蓟镇整军",d:"调戚继光镇蓟北，修边墙、练车营，北边晏然。"},
+     {n:"李成梁",r:"辽东名将",d:"镇守辽东，屡破蒙古、女真，威震东北。"},
+     {n:"海瑞",r:"应天巡抚",d:"清廉刚直，整饬吏治，名动江南。"},
+   ]},
+  ],
+  flow:"隆庆朝虽短，却在内阁<b>徐阶、高拱、张居正</b>更替中办成两件大事：<b>隆庆开关</b>解除海禁、开放月港；<b>俺答封贡</b>以王崇古、方逢时之力化干戈为玉帛，终结蒙古百年边患。又用<b>谭纶、戚继光</b>整饬蓟镇，北疆晏然。为万历中兴铺平道路。"},
+
+ 13:{title:"万历朝 · 张居正改革与三大征",sub:"改革极盛与怠政转折并存，后金悄然崛起。",
+  groups:[
+   {g:"张居正改革核心",color:"#3a6b6b",members:[
+     {n:"张居正",r:"首辅·改革家",d:"万历初柄国十年，推行一条鞭法、考成法，整饬吏治、富国强兵，死后被清算。"},
+     {n:"冯保",r:"司礼监·内援",d:"与张居正结盟，掌司礼监，为其改革的内廷支撑。"},
+     {n:"李太后",r:"太后",d:"万历生母，前期支持张居正严格辅政。"},
+   ]},
+   {g:"万历三大征名将",color:"#a8322a",members:[
+     {n:"李如松",r:"东征主将",d:"平宁夏、援朝鲜，平壤大捷扬威，后战殁于蒙古。"},
+     {n:"麻贵·刘綎·陈璘",r:"援朝诸将",d:"率军援朝抗日，露梁海战大破日军。"},
+     {n:"邓子龙",r:"老将·殉国",d:"露梁海战中壮烈殉国。"},
+   ]},
+   {g:"党争与边患",color:"#7d6a4f",members:[
+     {n:"申时行·王锡爵",r:"后首辅",d:"在国本之争中周旋调和，然难挽颓势。"},
+     {n:"顾宪成",r:"东林党领袖",d:"罢官后讲学东林书院、议论时政，「东林党」由此而起。"},
+     {n:"努尔哈赤",r:"后金建立者",d:"1616年建后金，1619年萨尔浒大败明军，辽东危局成形。"},
+     {n:"杨镐",r:"萨尔浒主帅",d:"四路分兵进剿，被努尔哈赤各个击破，惨败。"},
+   ]},
+  ],
+  flow:"万历初，<b>张居正</b>柄国十年、推行一条鞭法，内靠<b>冯保</b>、<b>李太后</b>支持，国力极盛。张死后遭清算，皇帝亲政却因国本之争转为三十年怠政。其间<b>万历三大征</b>皆胜，<b>李如松、麻贵、陈璘、邓子龙</b>扬威东亚；然党争（<b>东林党</b>）与边患并起，<b>努尔哈赤</b>建后金、萨尔浒一败，辽东从此不可收拾。"},
+
+ 14:{title:"泰昌朝 · 明末三大案",sub:"国本之争的苦果，晚明党争的导火索。",
+  groups:[
+   {g:"三大案关键人物",color:"#7d1f1a",members:[
+     {n:"郑贵妃",r:"争国本者",d:"万历宠妃，欲立己子为太子，与群臣僵持十余年。「梃击案」疑与之相关。"},
+     {n:"李可灼",r:"进红丸者",d:"鸿胪寺丞，进「红丸」致光宗暴毙，「红丸案」由此而来。"},
+     {n:"李选侍",r:"移宫案主角",d:"光宗宠妃，挟太子据乾清宫，「移宫案」由此而起。"},
+   ]},
+   {g:"东林党人",color:"#3a6b6b",members:[
+     {n:"杨涟·左光斗",r:"东林骨干",d:"力主「移宫」、拥立熹宗，后遭阉党迫害而死。"},
+     {n:"方从哲",r:"首辅",d:"万历末首辅，红丸案中饱受东林攻讦。"},
+   ]},
+  ],
+  flow:"朱常洛苦熬国本之争近二十年方即位，却纵欲致病、服<b>李可灼</b>「红丸」暴毙。围绕其死，<b>梃击案、红丸案、移宫案</b>接连爆发，<b>郑贵妃、李选侍</b>牵涉其中，<b>东林党</b>借机攻讦、党争愈演愈烈，成为晚明政治崩坏的重要引信。"},
+
+ 15:{title:"天启朝 · 阉党专权",sub:"魏忠贤专权迫害东林，辽东靠名将苦撑。",
+  groups:[
+   {g:"阉党",color:"#7d1f1a",members:[
+     {n:"魏忠贤",r:"「九千岁」·专权",d:"司礼监秉笔太监，结客氏、遍置党羽，专权乱政，生祠遍天下。"},
+     {n:"客氏",r:"熹宗乳母",d:"与魏忠贤勾结，把持内廷。"},
+   ]},
+   {g:"东林六君子",color:"#3a6b6b",members:[
+     {n:"杨涟",r:"东林·弹劾魏阉",d:"上疏列魏忠贤二十四大罪，惨死诏狱。"},
+     {n:"左光斗",r:"东林·直臣",d:"与杨涟同下诏狱，受酷刑而死。"},
+     {n:"魏大中·顾大章等",r:"东林志士",d:"「东林六君子」相继被害于狱中。"},
+   ]},
+   {g:"辽东名将",color:"#a8322a",members:[
+     {n:"熊廷弼",r:"辽东经略",d:"力主固守，因党争被冤杀、传首九边。"},
+     {n:"孙承宗",r:"蓟辽督师",d:"构筑「关宁锦防线」，练兵屯田，支撑辽东危局。"},
+     {n:"袁崇焕",r:"宁远守将",d:"宁远大捷，以红夷大炮重创努尔哈赤（努尔哈赤不久病卒）。"},
+   ]},
+  ],
+  flow:"熹宗痴迷木工、不理朝政，<b>魏忠贤</b>结乳母<b>客氏</b>专权，号称「九千岁」，生祠遍天下，残酷迫害<b>东林六君子</b>（杨涟、左光斗等）。辽东全靠<b>熊廷弼、孙承宗、袁崇焕</b>苦撑，然熊廷弼竟因党争被冤杀。熹宗无子，传位其弟朱由检（崇祯）。"},
+
+ 16:{title:"崇祯朝 · 内忧外患",sub:"流寇、后金、天灾交织，名将相继凋零。",
+  groups:[
+   {g:"忠臣良将",color:"#3a6b6b",members:[
+     {n:"袁崇焕",r:"蓟辽督师",d:"宁远大捷、宁锦大捷；后中皇太极反间计，被崇祯冤杀。"},
+     {n:"孙承宗",r:"蓟辽督师",d:"关宁锦防线缔造者，晚年守高阳、城破殉国。"},
+     {n:"卢象升",r:"督师",d:"力战农民军与清军，巨鹿之战孤军战死。"},
+     {n:"孙传庭",r:"陕西总督",d:"「传庭死而明亡」，潼关战殁，李自成遂入关中。"},
+     {n:"曹文诏·洪承畴",r:"边将",d:"曹文诏战殁；洪承畴松锦兵败被俘降清。"},
+   ]},
+   {g:"农民军领袖",color:"#a8322a",members:[
+     {n:"李自成",r:"大顺·闯王",d:"1644年建大顺、破北京，崇祯自缢，后败于清军。"},
+     {n:"张献忠",r:"大西·八大王",d:"转战南北，后入川建大西政权。"},
+   ]},
+   {g:"后金（清）",color:"#7d6a4f",members:[
+     {n:"皇太极",r:"清帝·反间",d:"改后金为清，绕道入塞，用反间计诱崇祯杀袁崇焕。"},
+     {n:"多尔衮",r:"摄政王",d:"1644年入关、定鼎北京，开启清朝大一统。"},
+   ]},
+   {g:"内廷",color:"#7d1f1a",members:[
+     {n:"魏忠贤",r:"阉党·被除",d:"崇祯即位后即遭铲除，自缢而死。"},
+     {n:"王承恩",r:"太监·陪殉",d:"煤山之上陪崇祯一同自缢。"},
+   ]},
+  ],
+  flow:"崇祯铲除阉党、勤政节俭，然刚愎多疑、频繁换相。对外，<b>皇太极</b>用反间计使其冤杀<b>袁崇焕</b>，长城自坏；对内，<b>李自成、张献忠</b>流寇蜂起，<b>卢象升、孙传庭</b>等名将相继战死，<b>洪承畴</b>兵败降清。1644年李自成破北京，崇祯于煤山自缢，<b>王承恩</b>陪殉——「君非亡国之君，而当亡国之运」。"},
+};
+// 把明转成 periods 结构（附 emp 供点击弹层）
+DYN.find(d=>d.id==="ming").periods = MING_ERAS.map((e,idx)=>({name:e.name, sub:e.sub, nodes:MING_EMP.filter(x=>x.era===idx).map(x=>({...x,emp:x.n}))}));
 
 /* ================= 渲染 ================= */
 const tabsEl=document.getElementById('tabs'), subnav=document.getElementById('subnav'), panels=document.getElementById('panels');
 const periodIndex={}; // dynId -> [{name,anchor}]
 
 function cardHTML(sym,node){
-  let h=`<div class="card ${node.tp?'tp':''}" data-n="${sym}">`;
+  const clickable = node.emp!=null;
+  let h=`<div class="card ${node.tp?'tp':''} ${clickable?'clickable':''}" data-n="${sym}"${clickable?` data-emp="${node.emp}"`:''}>`;
   if(node.tp&&node.tpLabel) h+=`<div class="tpflag">${node.tpLabel}</div>`;
   h+=`<div class="top"><span class="name">${node.name}</span>`;
   if(node.temple||node.b) h+=`<span class="temple">${node.temple||node.b}</span>`;
   if(node.years) h+=`<span class="years">${node.years}</span>`;
   h+=`</div>`;
   if(node.tags&&node.tags.length) h+=`<div class="tags">${node.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div>`;
-  h+=`<ul>${node.pts.map(p=>`<li>${p}</li>`).join("")}</ul></div>`;
+  if(node.rel) h+=`<div class="rel-line">血脉：${node.rel}</div>`;
+  h+=`<ul>${node.pts.map(p=>`<li>${p}</li>`).join("")}</ul>`;
+  if(clickable) h+=`<div class="clickhint">点击查看 · 帝王详情与人物关系图谱 ›</div>`;
+  h+=`</div>`;
   return h;
 }
 function connHTML(link){ return link?`<div class="conn ${link.t}"><span>${link.l}</span></div>`:""; }
@@ -459,6 +906,43 @@ subnav.addEventListener('click',e=>{
 });
 tabsEl.addEventListener('click',e=>{ const b=e.target.closest('button'); if(b)activate(b.dataset.tab); });
 panels.addEventListener('click',e=>{ const r=e.target.closest('.ovrow'); if(r&&r.dataset.goto)activate(r.dataset.goto); });
+
+/* ===== 帝王详情 / 人物关系图 弹层 ===== */
+const overlay=document.getElementById('overlay'), sheetBody=document.getElementById('sheet-body');
+function openEmp(n){
+  const e=MING_EMP.find(x=>x.n===n); if(!e)return;
+  const f=MING_FIGS[n]||{groups:[],flow:''};
+  document.getElementById('sh-name').textContent=e.temple+' · '+e.name;
+  document.getElementById('sh-temple').textContent=e.years;
+  let h='<div class="dossier">';
+  h+=`<div class="sec"><div class="sec-h"><span class="ico">生</span>帝王生平</div><div class="bio">${e.bio||''}</div></div>`;
+  h+=`<div class="sec"><div class="sec-h"><span class="ico">脉</span>血缘与继承</div><div class="relbox">${e.rel||''}</div></div>`;
+  h+=`<div class="sec"><div class="sec-h"><span class="ico">政</span>主要政绩与事件</div><ul>${e.pts.map(p=>`<li>${p}</li>`).join('')}</ul></div>`;
+  h+=`<div class="sec"><div class="sec-h"><span class="ico">评</span>正面评价 · 争议点</div><div class="proscons">`;
+  h+=`<div class="pc plus"><h4>✓ 正面评价</h4><ul>${(e.pros||[]).map(p=>`<li>${p}</li>`).join('')}</ul></div>`;
+  h+=`<div class="pc minus"><h4>✕ 争议点</h4><ul>${(e.cons||[]).map(p=>`<li>${p}</li>`).join('')}</ul></div>`;
+  h+=`</div></div></div>`;
+  if(f.groups&&f.groups.length){
+    h+=`<div class="figmap"><div class="map-h"><span class="ico">图</span>${f.title||'主要人物关系图谱'}</div>`;
+    if(f.sub)h+=`<div class="map-sub">${f.sub}</div>`;
+    f.groups.forEach(g=>{
+      h+=`<div class="figgroup"><div class="gname" style="background:${g.color||'#a8322a'}">${g.g}</div><div class="figcards">`;
+      g.members.forEach(m=>{ h+=`<div class="figcard"><span class="fn">${m.n}</span><span class="fr">${m.r}</span><div class="fd">${m.d}</div></div>`; });
+      h+=`</div></div>`;
+    });
+    if(f.flow)h+=`<div class="figflow"><span class="fh">🔗 关系脉络</span>${f.flow}</div>`;
+    h+=`</div>`;
+  }
+  sheetBody.innerHTML=h;
+  overlay.classList.add('show');
+  document.body.style.overflow='hidden';
+  overlay.scrollTop=0;
+}
+function closeEmp(){ overlay.classList.remove('show'); document.body.style.overflow=''; }
+document.getElementById('sh-close').addEventListener('click',closeEmp);
+overlay.addEventListener('click',ev=>{ if(ev.target===overlay)closeEmp(); });
+document.addEventListener('keydown',ev=>{ if(ev.key==='Escape')closeEmp(); });
+panels.addEventListener('click',ev=>{ const c=ev.target.closest('.card.clickable'); if(c)openEmp(+c.dataset.emp); });
 
 /* 滚动时高亮当前分期 */
 let io=null;
